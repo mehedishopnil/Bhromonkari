@@ -34,8 +34,8 @@ const Header = () => {
 
         {/* Login and Registration */}
         <div className='hidden md:flex md:justify-end md:items-center gap-5'>
-          <Link><button>Login</button></Link>
-          <Link><button>Registration</button></Link>
+          <Link to='login'><button>Login</button></Link>
+          <Link to='registration'><button>Registration</button></Link>
         </div>
 
         {/* Hamburger Icon for Mobile */}
