@@ -1,11 +1,46 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import bannerImg from '../../assets/Images/banner.jpg';
 
 const Home = () => {
-    return (
-        <div>
-            <h2>Home page</h2>
+  return (
+    <div className="relative h-screen">
+      {/* Banner with dark overlay */}
+      <div className="relative h-full bg-cover bg-center" style={{ backgroundImage: `url(${bannerImg})` }}>
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+
+          {/* Text in the middle of the banner */}
+          <div className='space-y-3'>
+            <p className="text-5xl md:text-6xl lg:text-7xl font-bold text-center">
+              Confused?
+            </p>
+            <p className="text-4xl md:text-5xl lg:text-6xl text-center">
+              Need Guide For Tour?
+            </p>
+            <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-center">
+              Here We Are?
+            </p>
+          </div>
+
+          {/* Choose tour place section */}
+          <p className="mt-10 text-4xl md:text-5xl lg:text-6xl pb-5"><span className='font-bold text-yellow-400'>Choose</span> tour place</p>
+
+          {/* Slidable category buttons */}
+          <div className="flex flex-wrap mt-2 space-x-4 justify-center">
+            {['Dhaka', 'Chattagram', 'Khulna', 'Rajshahi', 'Sylhet', 'Rangpur', 'Mymensingh'].map(category => (
+              <Link to={`/${category.toLowerCase()}`} key={category}>
+                <button className="flex items-center px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 mb-2">
+                  {/* Add your icons here */}
+                  <span className="mr-2">{category}</span>
+                </button>
+              </Link>
+            ))}
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Home;
