@@ -17,17 +17,17 @@ const Dashboard = () => {
         <div className="lg:w-64 lg:flex-shrink-0 bg-slate-200">
           <ul className="menu p-4 text-gray-700 font-bold text-lg">
             <li>
-              <Link to="listings">
+              <Link to="overview">
               <HiOutlineHomeModern /> Overview
               </Link>
             </li>
             <li>
-              <Link to="reservation">
-                <MdOutlineLuggage /> Expense
+              <Link to="expanse">
+                <MdOutlineLuggage /> Expanse
               </Link>
             </li>
             <li>
-              <Link to="earnings">
+              <Link to="budget-plan">
                 <LiaMoneyBillSolid /> Budget Plan
               </Link>
             </li>
