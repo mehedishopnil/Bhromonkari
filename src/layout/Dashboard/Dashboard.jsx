@@ -1,24 +1,33 @@
-import { Link, Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import { Disclosure, Transition } from "@headlessui/react";
 import { MdOutlineLuggage } from "react-icons/md";
 import { LiaMoneyBillSolid } from "react-icons/lia";
-import { TbBrandGoogleAnalytics } from "react-icons/tb";
-import { PiBookOpenText } from "react-icons/pi";
-import { MdAddHome } from "react-icons/md";
 import { FaHome, FaUser } from "react-icons/fa";
 import { HiOutlineHomeModern } from "react-icons/hi2";
 
 const Dashboard = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleMenuItemClick = (path) => {
+    navigate(path);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div>
-      <div className="lg:flex">
-
+      <div className="lg:flex h-screen">
         {/* Sidebar for LG screens */}
-        <div className="lg:w-64 lg:flex-shrink-0 bg-slate-200">
+        <div className="h-[240px] lg:w-64 lg:flex-shrink-0 bg-slate-200 h-screen md:h-auto">
           <ul className="menu p-4 text-gray-700 font-bold text-lg">
             <li>
               <Link to="overview">
-              <HiOutlineHomeModern /> Overview
+                <HiOutlineHomeModern /> Overview
               </Link>
             </li>
             <li>
@@ -31,17 +40,17 @@ const Dashboard = () => {
                 <LiaMoneyBillSolid /> Budget Plan
               </Link>
             </li>
-            
 
             <div className="border border-gray-400"></div>
 
             <li>
               <Link to="/">
-              <FaHome /> Home
+                <FaHome /> Home
               </Link>
-
+            </li>
+            <li>
               <Link to="profile">
-              <FaUser /> Profile
+                <FaUser /> Profile
               </Link>
             </li>
           </ul>
@@ -54,45 +63,43 @@ const Dashboard = () => {
         </div>
       </div>
 
-
-
       {/* Mobile navigation */}
       <div className="lg:hidden">
-        <Disclosure as="div" className="lg:hidden">
-          {({ open }) => (
-            <>
-              <Transition
-                show={open}
-                enter="transition-transform duration-300"
-                enterFrom="-translate-x-full"
-                enterTo="translate-x-0"
-                leave="transition-transform duration-300"
-                leaveFrom="translate-x-0"
-                leaveTo="-translate-x-full"
-              >
-                <Disclosure.Panel className="bg-gray-200 p-4">
-                  <ul className="menu text-gray-700 font-bold text-xl">
-                    <li>
-                      <Link to="reservation">Reservations</Link>
-                    </li>
-                    <li>
-                      <Link to="earnings">Earnings</Link>
-                    </li>
-                    <li>
-                      <Link to="reservation">Insights</Link>
-                    </li>
-                    <li>
-                      <Link to="reservation">Guidebooks</Link>
-                    </li>
-                    <li>
-                      <Link to="reservation">Create a new list</Link>
-                    </li>
-                  </ul>
-                </Disclosure.Panel>
-              </Transition>
-            </>
-          )}
-        </Disclosure>
+      <button onClick={toggleMobileMenu} className="text-white focus:outline-none">
+          Toggle Mobile Menu
+        </button>
+
+        <Transition
+          show={mobileMenuOpen}
+          enter="transition-transform duration-300"
+          enterFrom="-translate-x-full"
+          enterTo="translate-x-0"
+          leave="transition-transform duration-300"
+          leaveFrom="translate-x-0"
+          leaveTo="-translate-x-full"
+        >
+          <div className="bg-gray-200 p-4 ">
+            {/* 56px is the approximate height of your button or header */}
+            <ul className="menu text-gray-700 font-bold text-xl">
+              <li>
+                <button onClick={() => handleMenuItemClick("/overview")}>
+                  Overview
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleMenuItemClick("/expanse")}>
+                  Expanse
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleMenuItemClick("/budget-plan")}>
+                  Budget Plan
+                </button>
+              </li>
+              {/* ... other menu items ... */}
+            </ul>
+          </div>
+        </Transition>
       </div>
     </div>
   );
