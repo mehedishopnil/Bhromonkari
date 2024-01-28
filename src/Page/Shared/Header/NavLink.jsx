@@ -5,7 +5,7 @@ const NavLink = ({ to, label, isActive }) => {
     return (
         <Link
             to={to}
-            className={`hover:text-gray-300 ${isActive(to) ? 'text-blue-500 underline' : ''}`}
+            className={`hover:text-[#f4b664] ${isActive(to) ? 'text-[#f4b664]  *:underline' : ''}`}
         >
             {label}
         </Link>

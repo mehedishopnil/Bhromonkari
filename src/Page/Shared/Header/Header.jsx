@@ -25,7 +25,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className='hidden md:flex md:items-center md:space-x-4'>
+        <div className='hidden md:flex md:items-center md:space-x-10'>
           <NavLink to='/' label='Home' isActive={isActive} />
           <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
           <NavLink to='/bookings' label='Bookings' isActive={isActive} />
