@@ -1,6 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AiOutlineShop, AiOutlineHome, AiOutlineCar, AiOutlineBank, AiOutlineCompass, AiOutlineHeatMap } from 'react-icons/ai';
+import { FaMountainCity } from "react-icons/fa6";
+import { GiCargoShip } from "react-icons/gi";
+import { GiMountedKnight } from "react-icons/gi";
+import { GiForest } from "react-icons/gi";
+import { LuSchool } from "react-icons/lu";
 import bannerImg from '../../assets/Images/banner.jpg';
+import { GiFarmTractor } from "react-icons/gi";
+
+const categoryIcons = {
+  Dhaka: AiOutlineShop,
+  Chattagram: GiCargoShip ,
+  Khulna: GiForest ,
+  Rajshahi: GiMountedKnight ,
+  Sylhet: FaMountainCity,
+  Rangpur: GiFarmTractor ,
+  Mymensingh: LuSchool,
+};
 
 const Home = () => {
   return (
@@ -24,15 +41,16 @@ const Home = () => {
           </div>
 
           {/* Choose tour place section */}
-          <p className="mt-10 text-4xl md:text-5xl lg:text-6xl pb-5"><span className='font-bold text-yellow-400'>Choose</span> tour place</p>
+          <p className="mt-10 text-3xl md:text-4xl lg:text-6xl pb-5"><span className='font-bold text-yellow-400'>Choose</span> tour place</p>
 
           {/* Slidable category buttons */}
           <div className="flex flex-wrap mt-2 space-x-4 justify-center">
             {['Dhaka', 'Chattagram', 'Khulna', 'Rajshahi', 'Sylhet', 'Rangpur', 'Mymensingh'].map(category => (
               <Link to={`/${category.toLowerCase()}`} key={category}>
-                <button className="flex items-center px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 mb-2">
-                  {/* Add your icons here */}
-                  <span className="mr-2">{category}</span>
+                <button className="flex items-center px-8 py-4 bg-white text-black rounded-full hover:text-blue-700 mb-2">
+                  {/* Use the icon based on the category */}
+                  {React.createElement(categoryIcons[category], { size: 24, className: 'mr-2' })}
+                  <span>{category}</span>
                 </button>
               </Link>
             ))}
