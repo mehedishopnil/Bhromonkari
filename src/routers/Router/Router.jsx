@@ -10,6 +10,7 @@ import Overview from "../../Page/Overview/Overview";
 import Expanse from "../../Page/Expanse/Expanse";
 import BudgetPlan from "../../Page/BudgetPlan/BudgetPlan";
 import Profile from "../../Page/Profile/Profile";
+import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: 'registration',
                 element: <Registration></Registration>
+            },
+            {
+                path: 'category/:category',
+                element: <CategoryPage></CategoryPage>
             }
             
         ]

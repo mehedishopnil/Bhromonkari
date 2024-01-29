@@ -1,0 +1,284 @@
+ [
+    {
+        "id": 1,
+        "name": "Lalbagh Fort",
+        "location": "Old Dhaka",
+        "image": "https://live.staticflickr.com/65535/48530509381_c7eb7d3d24_b.jpg",
+        "description": "Lalbagh Fort is an iconic historical fort in the heart of Old Dhaka.",
+        "category": "dhaka"
+      },
+      {
+        "id": 2,
+        "name": "Ahsan Manzil",
+        "location": "Sadarghat",
+        "image": "https://pg.world/upl/ckeditor4_files/8e6855e374411b66f7050d8975bdeef6.jpg",
+        "description": "Ahsan Manzil is the former residential palace of the Nawab of Dhaka.",
+        "category": "dhaka"
+      },
+      {
+        "id": 3,
+        "name": "Jatiyo Sangsad Bhaban",
+        "location": "Sher-e-Bangla Nagar",
+        "image": "https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/39/97/9d.jpg",
+        "description": "Jatiyo Sangsad Bhaban is the National Parliament House of Bangladesh.",
+        "category": "dhaka"
+      },
+      {
+        "id": 4,
+        "name": "Dhakeshwari Temple",
+        "location": "Dhakeshwari",
+        "image": "https://lh3.googleusercontent.com/proxy/oLyCK7q4i1Xk2VZlu1fEx1mO9T4xDLprGpn-Xq96ZZQrySntVBIbYclpMNvXXFA3NDamsSMCdnkKG0vDJ_AYFhyqpJYdoKjuKALal_KPuFzrv8SvS-S4FnZvokzTp4ngQyJuZmd2KNBhlLouWEKj0M8I_nDEIMAxqq0",
+        "description": "Dhakeshwari Temple is a Hindu temple in Dhaka dedicated to Goddess Dhakeshwari.",
+        "category": "dhaka"
+      },
+      {
+        "id": 5,
+        "name": "National Museum of Bangladesh",
+        "location": "Shahbagh",
+        "image": "https://www.newagebd.com/files/records/news/202208/177739_130.jpg",
+        "description": "National Museum of Bangladesh showcases the rich cultural heritage of the country.",
+        "category": "dhaka"
+      },
+    {
+      "id": 1,
+      "name": "Cox's Bazar",
+      "location": "Cox's Bazar",
+      "image": "coxs_bazar.jpg",
+      "description": "Cox's Bazar is the longest sea beach in the world.",
+      "category": "chattagram"
+    },
+    {
+      "id": 2,
+      "name": "Patenga Sea Beach",
+      "location": "Patenga, Chattagram",
+      "image": "patenga_sea_beach.jpg",
+      "description": "Patenga Sea Beach is a popular tourist destination in Chattagram.",
+      "category": "chattagram"
+    },
+    {
+      "id": 3,
+      "name": "Hill Tracts",
+      "location": "Hill Tracts region",
+      "image": "hill_tracts.jpg",
+      "description": "Explore the scenic beauty of the Hill Tracts region in Chattagram.",
+      "category": "chattagram"
+    },
+    {
+      "id": 4,
+      "name": "Chittagong Ship Breaking Yard",
+      "location": "Sitakunda, Chattagram",
+      "image": "ship_breaking_yard.jpg",
+      "description": "Chittagong Ship Breaking Yard is one of the world's largest ship breaking yards.",
+      "category": "chattagram"
+    },
+    {
+      "id": 5,
+      "name": "Foy's Lake",
+      "location": "Pahartali, Chattagram",
+      "image": "foys_lake.jpg",
+      "description": "Foy's Lake is a popular recreational spot in Chattagram.",
+      "category": "chattagram"
+    },
+    {
+        "id": 1,
+        "name": "Sundarbans",
+        "location": "khulna",
+        "image": "sundarbans.jpg",
+        "description": "Sundarbans is the largest mangrove forest and a UNESCO World Heritage Site.",
+        "category": "khulna"
+      },
+      {
+        "id": 2,
+        "name": "Bagerhat",
+        "location": "Bagerhat, Khulna",
+        "image": "bagerhat.jpg",
+        "description": "Bagerhat is known for its historic mosque city, a UNESCO World Heritage Site.",
+        "category": "khulna"
+      },
+      {
+        "id": 3,
+        "name": "Mongla Port",
+        "location": "Mongla, Khulna",
+        "image": "mongla_port.jpg",
+        "description": "Mongla Port is the second-largest seaport in Bangladesh.",
+        "category": "khulna"
+      },
+      {
+        "id": 4,
+        "name": "Sixty Dome Mosque",
+        "location": "Bagerhat, Khulna",
+        "image": "sixty_dome_mosque.jpg",
+        "description": "Sixty Dome Mosque is an ancient mosque in Bagerhat.",
+        "category": "khulna"
+      },
+      {
+        "id": 5,
+        "name": "Dobhi Danga",
+        "location": "Sundarbans, Khulna",
+        "image": "dobhi_danga.jpg",
+        "description": "Dobhi Danga is a picturesque spot in the Sundarbans.",
+        "category": "khulna"
+      },
+      {
+        "id": 1,
+        "name": "Varendra Research Museum",
+        "location": "Rajshahi",
+        "image": "varendra_museum.jpg",
+        "description": "Varendra Research Museum is the oldest museum in Bangladesh.",
+        "category": "Rajshahi"
+      },
+      {
+        "id": 2,
+        "name": "Padma Resort Rajshahi",
+        "location": "Rajshahi",
+        "image": "padma_resort.jpg",
+        "description": "Padma Resort Rajshahi is a luxurious resort overlooking the Padma River.",
+        "category": "Rajshahi"
+      },
+      {
+        "id": 3,
+        "name": "Sompur Bihara",
+        "location": "Naogaon, Rajshahi",
+        "image": "sompur_bihara.jpg",
+        "description": "Sompur Bihara is a UNESCO World Heritage Site, known for its ancient monastery.",
+        "category": "Rajshahi"
+      },
+      {
+        "id": 4,
+        "name": "Bara Kuthi",
+        "location": "Natore, Rajshahi",
+        "image": "bara_kuthi.jpg",
+        "description": "Bara Kuthi is a historical site in Natore, Rajshahi.",
+        "category": "Rajshahi"
+      },
+      {
+        "id": 5,
+        "name": "Dhopadighi Eco-Park",
+        "location": "Rajshahi",
+        "image": "dhopadighi_eco_park.jpg",
+        "description": "Dhopadighi Eco-Park is a serene eco-park in Rajshahi.",
+        "category": "Rajshahi"
+      },
+      {
+        "id": 1,
+        "name": "Ratargul Swamp Forest",
+        "location": "Gowainghat, Sylhet",
+        "image": "ratargul_swamp_forest.jpg",
+        "description": "Ratargul Swamp Forest is the only swamp forest in Bangladesh.",
+        "category": "shyleth"
+      },
+      {
+        "id": 2,
+        "name": "Jaflong",
+        "location": "Jaflong, Sylhet",
+        "image": "jaflong.jpg",
+        "description": "Jaflong is a scenic area known for its tea gardens, hills, and rivers.",
+        "category": "shyleth"
+      },
+      {
+        "id": 3,
+        "name": "Bisnakandi",
+        "location": "Gowainghat, Sylhet",
+        "image": "bisnakandi.jpg",
+        "description": "Bisnakandi is a beautiful riverine area surrounded by hills.",
+        "category": "shyleth"
+      },
+      {
+        "id": 4,
+        "name": "Lalakhal",
+        "location": "Sylhet",
+        "image": "lalakhal.jpg",
+        "description": "Lalakhal is a pristine blue river surrounded by greenery.",
+        "category": "shyleth"
+      },
+      {
+        "id": 5,
+        "name": "Shahjalal University of Science and Technology (SUST)",
+        "location": "Sylhet",
+        "image": "sust.jpg",
+        "description": "SUST is one of the most renowned universities in Bangladesh.",
+        "category": "shyleth"
+      },
+      {
+        "id": 1,
+        "name": "Tajhat Palace",
+        "location": "rangpur",
+        "image": "tajhat_palace.jpg",
+        "description": "Tajhat Palace is a historic palace and a popular tourist attraction.",
+        "category": "rangpur"
+      },
+      {
+        "id": 2,
+        "name": "rangpur Zoo",
+        "location": "rangpur",
+        "image": "rangpur_zoo.jpg",
+        "description": "rangpur Zoo is a zoological park with diverse wildlife.",
+        "category": "rangpur"
+      },
+      {
+        "id": 3,
+        "name": "Begum Rokeya Memorial Center",
+        "location": "Pairabandh, Rangpur",
+        "image": "begum_rokeya_memorial_center.jpg",
+        "description": "Begum Rokeya Memorial Center pays tribute to the renowned feminist writer Begum Rokeya.",
+        "category": "rangpur"
+      },
+      {
+        "id": 4,
+        "name": "rangpur Carmichael College",
+        "location": "rangpur",
+        "image": "carmichael_college.jpg",
+        "description": "Carmichael College is one of the oldest colleges in Bangladesh.",
+        "category": "rangpur"
+      },
+      {
+        "id": 5,
+        "name": "Bhawal National Park",
+        "location": "rangpur",
+        "image": "bhawal_national_park.jpg",
+        "description": "Bhawal National Park is a nature reserve and wildlife sanctuary.",
+        "category": "rangpur"
+      },
+      {
+        "id": 1,
+        "name": "Birishiri",
+        "location": "Durgapur, Mymensingh",
+        "image": "birishiri.jpg",
+        "description": "Birishiri is known for its picturesque landscape and the Dhanu River.",
+        "category": "mymensingh"
+      },
+      {
+        "id": 2,
+        "name": "Baliati Palace",
+        "location": "Saturia, Mymensingh",
+        "image": "baliati_palace.jpg",
+        "description": "Baliati Palace is an ancient zamindar's palace with a historical significance.",
+        "category": "mymensingh"
+      },
+      {
+        "id": 3,
+        "name": "Agricultural University, Mymensingh",
+        "location": "mymensingh",
+        "image": "agricultural_university.jpg",
+        "description": "Bangladesh Agricultural University is a leading agricultural institution.",
+        "category": "mymensingh"
+      },
+      {
+        "id": 4,
+        "name": "Brahmaputra River",
+        "location": "mymensingh",
+        "image": "brahmaputra_river.jpg",
+        "description": "The Brahmaputra River flows through the picturesque landscapes of Mymensingh.",
+        "category": "mymensingh"
+      },
+      {
+        "id": 5,
+        "name": "Jamuna Future Park",
+        "location": "mymensingh",
+        "image": "jamuna_future_park.jpg",
+        "description": "Jamuna Future Park is one of the largest shopping malls in South Asia.",
+        "category": "mymensingh"
+      }
+  ]
+
+
