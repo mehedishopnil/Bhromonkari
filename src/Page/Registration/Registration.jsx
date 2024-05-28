@@ -1,10 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const Registration = () => {
-    return (
-        
-            
+  const [isRegistration, setIsRegistration] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { createUser } = useContext(AuthContext);
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleRegistration = (e) =>{
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photoUrl = form.photoUrl.value;
+
+    createUser(name, email, password, photoUrl)
+    .then((result) =>{
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      
+
+    })
+
+    setIsRegistration(true);
+    
+
+    if (isRegistration) {
+      navigate(from , {replace: true});
+    } else{
+      navigate("/")
+    }
+  };
+
+    return (     
       <div
         className="hero w-full h-auto p-10 shadow-2xl rounded bg-base-200"
         
@@ -15,7 +48,7 @@ const Registration = () => {
               Register Now
             </h1>
 
-            <form  className="card-body">
+            <form onSubmit={handleRegistration} className="card-body">
               <div>
                 <div className="form-control">
                   <label className="label">

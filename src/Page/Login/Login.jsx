@@ -1,6 +1,58 @@
-import { Link, } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate, } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const [isLoggedin, setIsLoggedIn] = useState(false);
+
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    login(email, password)
+    .then((result) =>{
+      const user = result.user;
+      console.log(user);
+      Swal.fire({
+        title: "Successfully Logged In ",
+        showClass: {
+          popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `,
+        },
+        hideClass: {
+          popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `,
+        },
+      });
+      setIsLoggedIn(true);
+      navigate(from , {replace: true});
+    })
+    .catch ((error) =>{
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Wrong Email or Password",
+        footer: "Please enter correct Email or Password",
+      });
+    })
+
+  }
+
 
   
   return (
@@ -14,7 +66,7 @@ const Login = () => {
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <h1 className="text-center text-2xl font-bold pt-4">LogIn</h1>
 
-            <form  className="card-body">
+            <form onSubmit={handleLogin}  className="card-body">
               <div>
                 <div className="form-control">
                   <label className="label">
