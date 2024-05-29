@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
-import Swal from 'sweetalert2';
 
 const Registration = () => {
   const [isRegistration, setIsRegistration] = useState(false);
@@ -18,6 +17,7 @@ const Registration = () => {
     const email = form.email.value;
     const password = form.password.value;
     const photoUrl = form.photoUrl.value;
+  
 
     createUser(name, email, password, photoUrl)
     .then((result) =>{

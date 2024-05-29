@@ -11,21 +11,17 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // User Part
   const createUser = async (name, photoUrl, email, password) => {
+     console.log({name, email, password});
     setLoading(true);
     try {
-      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      // Update user's display Name
       await updateProfile(userCredential.user, {
         displayName: name,
         photoURL: photoUrl,
       });
 
-      // Users for backend server:
-      const saveUser = { name: name, email: email };
+      const saveUser = { name, email };
       const response = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
@@ -35,57 +31,44 @@ const AuthProviders = ({ children }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! State: ${response.status}`)
+        throw new Error(`HTTP error! State: ${response.status}`);
       }
 
       const userCreateData = await response.json();
 
       if (userCreateData.insertedId) {
-          Swal.fire({
-               title: "Registration Success ",
-               showClass: {
-                 popup: `
-                 animate__animated
-                 animate__fadeInUp
-                 animate__faster
-               `,
-               },
-               hideClass: {
-                 popup: `
-                 animate__animated
-                 animate__fadeOutDown
-                 animate__faster
-               `,
-               },
-             });
+        Swal.fire({
+          title: "Registration Success",
+          showClass: {
+            popup: 'animate__animated animate__fadeInUp animate__faster',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutDown animate__faster',
+          },
+        });
       }
 
-      // Set the user in the state
       setUser(userCredential.user);
       return userCredential;
 
     } catch (error) {
-      // Handle error
-      console.log("Error updating profile:", error);
+      console.error("Error creating user:", error.message);
       throw error;
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  // Login Part
   const login = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Google Login
   const googleLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, new GoogleAuthProvider());
   };
 
-  // LogOut Part
   const LogOut = () => {
     setLoading(true);
     return signOut(auth);
