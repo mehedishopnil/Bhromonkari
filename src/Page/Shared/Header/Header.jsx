@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import NavLink from "./NavLink";
+import { AuthContext } from '../../../providers/AuthProviders';
 
 const Header = () => {
+  const { user, LogOut } = useContext(AuthContext);
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -29,13 +31,22 @@ const Header = () => {
           <NavLink to='/' label='Home' isActive={isActive} />
           <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
           <NavLink to='/bookings' label='Bookings' isActive={isActive} />
-          <NavLink to='/dashboard' label='Dashboard' isActive={isActive} />
+          {user && <NavLink to='/dashboard' label='Dashboard' isActive={isActive} />}
         </div>
 
-        {/* Login and Registration */}
+        {/* Login and Registration or User Info and Logout */}
         <div className='hidden md:flex md:justify-end md:items-center gap-5'>
-          <Link to='login'><button>Login</button></Link>
-          <Link to='registration'><button>Registration</button></Link>
+          {user ? (
+            <>
+              <img src={user.photoURL} alt="User Photo" className="w-10 h-10 rounded-full" />
+              <button onClick={LogOut} className="btn bg-red-500 text-white hover:bg-red-700">Log Out</button>
+            </>
+          ) : (
+            <>
+              <Link to='/login'><button className="btn bg-blue-500 text-white hover:bg-blue-700">Login</button></Link>
+              <Link to='/registration'><button className="btn bg-green-500 text-white hover:bg-green-700">Registration</button></Link>
+            </>
+          )}
         </div>
 
         {/* Hamburger Icon for Mobile */}
@@ -55,7 +66,7 @@ const Header = () => {
             <li><NavLink to='/' label='Home' isActive={isActive} onClick={closeMobileMenu} /></li>
             <li><NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} onClick={closeMobileMenu} /></li>
             <li><NavLink to='/bookings' label='Bookings' isActive={isActive} onClick={closeMobileMenu} /></li>
-            <li><NavLink to='/dashboard' label='Dashboard' isActive={isActive} onClick={closeMobileMenu} /></li>
+            {user && <li><NavLink to='/dashboard' label='Dashboard' isActive={isActive} onClick={closeMobileMenu} /></li>}
           </ul>
         </div>
       )}
