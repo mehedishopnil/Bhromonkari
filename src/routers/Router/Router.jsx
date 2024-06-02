@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main/Main";
 import Home from "../../Page/Home/Home";
-import Dashboard from "../../layout/Dashboard/dashboard";
+import Dashboard from "../../layout/Dashboard/dashboard"; // Ensure this path is correct
 import TourPlan from "../../Page/TourPlan/TourPlan";
 import Bookings from "../../Page/Bookings/Bookings";
 import Login from "../../Page/Login/Login";
@@ -15,11 +15,11 @@ import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 export const router = createBrowserRouter([
     {
         path: '/',
-        element:<Main></Main>,
-        children:[
+        element: <Main></Main>,
+        children: [
             {
-                path:'/',
-                element:<Home></Home>,
+                path: '/',
+                element: <Home></Home>,
             },
             {
                 path: 'tour-plan',
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
             {
                 path: 'bookings',
                 element: <Bookings></Bookings>
-            }, 
+            },
             {
                 path: 'login',
                 element: <Login></Login>
@@ -41,18 +41,17 @@ export const router = createBrowserRouter([
                 path: 'category/:category',
                 element: <CategoryPage></CategoryPage>
             }
-            
+
         ]
     },
 
     {
         path: 'dashboard',
-        element:<Dashboard></Dashboard>,
-        children:[
+        element: <Dashboard></Dashboard>,
+        children: [
             {
                 path: 'overview',
                 element: <Overview></Overview>
-            
             },
             {
                 path: 'expanse',
@@ -66,7 +65,6 @@ export const router = createBrowserRouter([
                 path: 'profile',
                 element: <Profile></Profile>
             }
-            
         ]
     }
-])
+]);
