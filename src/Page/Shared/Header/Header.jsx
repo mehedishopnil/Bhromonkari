@@ -39,12 +39,13 @@ const Header = () => {
           {user ? (
             <>
               <img src={user.photoURL} alt="User Photo" className="w-10 h-10 rounded-full" />
-              <button onClick={LogOut} className="btn bg-red-500 text-white hover:bg-red-700">Log Out</button>
+              <button onClick={LogOut} className="btn btn-outline text-white hover:bg-red-700">Log Out</button>
             </>
           ) : (
             <>
-              <Link to='/login'><button className="btn bg-blue-500 text-white hover:bg-blue-700">Login</button></Link>
-              <Link to='/registration'><button className="btn bg-green-500 text-white hover:bg-green-700">Registration</button></Link>
+              <Link to='/login'><button className="btn btn-outline text-white hover:bg-blue-700 hover:text-white">Login</button></Link>
+
+              <Link to='/registration'><button className="btn btn-outline  text-white hover:bg-green-700 hover:text-white">Registration</button></Link>
             </>
           )}
         </div>
