@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main/Main";
 import Home from "../../Page/Home/Home";
 import Dashboard from "../../layout/Dashboard/dashboard";
-import TourPlan from "../../Page/TourPlan/TTourPlan";
+import TourPlan from "../../Page/TourPlan/TourPlan";
 import Bookings from "../../Page/Bookings/Bookings";
 import Login from "../../Page/Login/Login";
 import Registration from "../../Page/Registration/Registration";
@@ -15,54 +15,58 @@ import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main />,  // Ensure consistent use of <Component /> syntax
-        children: [
+        element:<Main></Main>,
+        children:[
             {
-                path: '/',
-                element: <Home />,
+                path:'/',
+                element:<Home></Home>,
             },
             {
                 path: 'tour-plan',
-                element: <TourPlan />
+                element: <TourPlan></TourPlan>
             },
             {
                 path: 'bookings',
-                element: <Bookings />
-            },
+                element: <Bookings></Bookings>
+            }, 
             {
                 path: 'login',
-                element: <Login />
+                element: <Login></Login>
             },
             {
                 path: 'registration',
-                element: <Registration />
+                element: <Registration></Registration>
             },
             {
                 path: 'category/:category',
-                element: <CategoryPage />
+                element: <CategoryPage></CategoryPage>
             }
+            
         ]
     },
+
     {
         path: 'dashboard',
-        element: <Dashboard />,  // Ensure consistent use of <Component /> syntax
-        children: [
+        element:<Dashboard></Dashboard>,
+        children:[
             {
                 path: 'overview',
-                element: <Overview />
+                element: <Overview></Overview>
+            
             },
             {
                 path: 'expanse',
-                element: <Expanse />
+                element: <Expanse></Expanse>
             },
             {
                 path: 'budget-plan',
-                element: <BudgetPlan />
+                element: <BudgetPlan></BudgetPlan>
             },
             {
                 path: 'profile',
-                element: <Profile />
+                element: <Profile></Profile>
             }
+            
         ]
     }
-]);
+])

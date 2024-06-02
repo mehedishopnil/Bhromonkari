@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <div className='bg-gray-800 text-white p-4'>
-      <div className='flex items-center justify-between'>
+       <div className='flex items-center justify-between'>
         {/* Logo */}
         <div className='flex items-center'>
           <h2 className='text-2xl font-bold'>BHROMONKARI</h2>
@@ -38,7 +38,9 @@ const Header = () => {
         <div className='hidden md:flex md:justify-end md:items-center gap-5'>
           {user ? (
             <>
-              <img src={user.photoURL} alt="User Photo" className="w-10 h-10 rounded-full" />
+              {user.photoURL && (
+                <Link to={'/dashboard/profile'}><img src={user.photoURL} alt="User Avatar" className="w-10 h-10 rounded-full" /></Link>
+              )}
               <button onClick={LogOut} className="btn btn-outline text-white hover:bg-red-700">Log Out</button>
             </>
           ) : (
