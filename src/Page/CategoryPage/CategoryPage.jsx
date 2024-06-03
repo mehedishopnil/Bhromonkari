@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+
+
+
 
 const CategoryPage = () => {
   const { category } = useParams();
-  const [categoryData, setCategoryData] = useState([]);
+ 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/tourPlaceData.json');
-        // Filter data based on the category
-        const filteredData = response.data.filter(item => item.category.toLowerCase() === category.toLowerCase());
-        setCategoryData(filteredData);
-      } catch (error) {
-        console.error('Error fetching category data:', error);
-      }
-    };
-
-    fetchData();
-  }, [category]);
+ 
 
   return (
     <div className="container mx-auto px-4">

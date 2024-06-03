@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 import app from "../firebase/firebase.config"; // Ensure this path is correct
 import { GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 // Create a context for authentication
 export const AuthContext = createContext();
@@ -11,6 +12,7 @@ const auth = getAuth(app);
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [categoryData, setCategoryData] = useState([]);
 
   const createUser = async (name, photoUrl, email, password) => {
     console.log({ name, email, password });
@@ -109,6 +111,21 @@ const AuthProviders = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://bhromonkari-server.vercel.app/tourPlace');
+        // Filter data based on the category
+        const filteredData = response.data.filter(item => item.category.toLowerCase() === category.toLowerCase());
+        setCategoryData(filteredData);
+      } catch (error) {
+        console.error('Error fetching category data:', error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
+
   const authInfo = {
     user,
     loading,
@@ -117,6 +134,7 @@ const AuthProviders = ({ children }) => {
     login,
     googleLogin,
     LogOut,
+    categoryData
   };
 
   return (
