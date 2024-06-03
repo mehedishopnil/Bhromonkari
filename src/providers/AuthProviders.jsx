@@ -13,6 +13,7 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [categoryData, setCategoryData] = useState([]);
+  const [category, setCategory] = useState("defaultCategory"); // Initialize with a default category or as needed
 
   const createUser = async (name, photoUrl, email, password) => {
     console.log({ name, email, password });
@@ -124,7 +125,7 @@ const AuthProviders = ({ children }) => {
     };
 
     fetchData();
-  }, [category]);
+  }, [category]); // Add category to the dependency array
 
   const authInfo = {
     user,
