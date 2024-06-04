@@ -12,6 +12,7 @@ import BudgetPlan from "../../Page/BudgetPlan/BudgetPlan";
 import Profile from "../../Page/Profile/Profile";
 import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 import Dashboard from "../../layout/Dashboard/Dashboard";
+import SingleTourPlacePage from "../../components/SingleTourPlacePage/SingleTourPlacePage";
 
 
 export const router = createBrowserRouter([
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
             {
                 path: 'category/:category',
                 element: <CategoryPage></CategoryPage>
+            }, 
+            {
+                path: 'singleTourPlace',
+                element: <SingleTourPlacePage/>
             }
 
         ]
