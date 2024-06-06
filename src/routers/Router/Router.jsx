@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
                 element: <CategoryPage></CategoryPage>
             }, 
             {
-                path: 'singleTourPlace',
+                path: 'tour-places/:_id',
                 element: <SingleTourPlacePage/>
             }
 
@@ -71,7 +71,8 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile></Profile>
-            }
+            },
+            
         ]
     }
 ]);

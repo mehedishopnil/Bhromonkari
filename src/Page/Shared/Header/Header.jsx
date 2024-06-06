@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <div className='bg-gray-800 text-white p-4'>
-       <div className='flex items-center justify-between'>
+      <div className='flex items-center justify-between'>
         {/* Logo */}
         <div className='flex items-center'>
           <h2 className='text-2xl font-bold'>BHROMONKARI</h2>
@@ -34,20 +34,24 @@ const Header = () => {
           {user && <NavLink to='/dashboard' label='Dashboard' isActive={isActive} />}
         </div>
 
-        {/* Login and Registration or User Info and Logout */}
+        {/* Login and Registration or user Info and Logout */}
         <div className='hidden md:flex md:justify-end md:items-center gap-5'>
           {user ? (
             <>
-              {user.photoURL && (
-                <Link to={'/dashboard/profile'}><img src={user.photoURL} alt="User Avatar" className="w-10 h-10 rounded-full" /></Link>
+              {user.photoUrl && (
+                <Link to={'/dashboard/profile'}>
+                  <div className="flex items-center gap-2">
+                    <img src={user.photoUrl} alt="user Avatar" className="w-10 h-10 rounded-full" />
+                    <h1 className="text-white">{user.displayName}</h1>
+                  </div>
+                </Link>
               )}
               <button onClick={LogOut} className="btn btn-outline text-white hover:bg-red-700">Log Out</button>
             </>
           ) : (
             <>
               <Link to='/login'><button className="btn btn-outline text-white hover:bg-blue-700 hover:text-white">Login</button></Link>
-
-              <Link to='/registration'><button className="btn btn-outline  text-white hover:bg-green-700 hover:text-white">Registration</button></Link>
+              <Link to='/registration'><button className="btn btn-outline text-white hover:bg-green-700 hover:text-white">Registration</button></Link>
             </>
           )}
         </div>

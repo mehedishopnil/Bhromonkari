@@ -18,6 +18,21 @@ const auth = getAuth(app);
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
+  
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser) {
+        const userData = await fetchUserData(currentUser.email);
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const createUser = async (name, photoUrl, email, password) => {
     console.log({ name, email, password });
@@ -36,13 +51,16 @@ const AuthProviders = ({ children }) => {
       });
 
       const saveUser = { name, email, photoUrl };
-      const response = await fetch("https://bhromonkari-server.vercel.app/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(saveUser),
-      });
+      const response = await fetch(
+        "http://localhost:5000/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -75,13 +93,16 @@ const AuthProviders = ({ children }) => {
   const updateUser = async (name, photoUrl, email) => {
     try {
       setLoading(true);
-      const response = await fetch(`https://bhromonkari-server.vercel.app/${email}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, photoURL: photoUrl }),
-      });
+      const response = await fetch(
+        `http://localhost:5000/${email}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, photoURL: photoUrl }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -97,32 +118,36 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  // Login
+  const fetchUserData = async (email) => {
+    try {
+      const response = await fetch("http://localhost:5000/users");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const users = await response.json();
+      const userData = users.find(user => user.email === email);
+      setUserData(userData);
+      return userData;
+    } catch (error) {
+      console.error("Error fetching user data:", error.message);
+      throw error;
+    }
+  };
+
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Google Login
   const googleLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, new GoogleAuthProvider());
   };
 
-  // Logout
   const LogOut = () => {
     setLoading(true);
     return signOut(auth);
   };
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const authInfo = {
     user,
@@ -132,6 +157,7 @@ const AuthProviders = ({ children }) => {
     login,
     googleLogin,
     LogOut,
+    userData,
   };
 
   return (
