@@ -14,11 +14,12 @@ const Registration = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
+    const website = form.website.value;
     const email = form.email.value;
     const password = form.password.value;
     const photoUrl = form.photoUrl.value;
 
-    createUser(name, photoUrl, email, password)
+    createUser(name, photoUrl, website, email, password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
@@ -67,6 +68,18 @@ const Registration = () => {
 
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Website</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="input your Web link"
+                  name="website"
+                  className="input input-bordered"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
@@ -76,6 +89,8 @@ const Registration = () => {
                   className="input input-bordered"
                 />
               </div>
+
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>

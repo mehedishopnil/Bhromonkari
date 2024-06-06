@@ -52,7 +52,7 @@ const AuthProviders = ({ children }) => {
 
       const saveUser = { name, email, photoUrl };
       const response = await fetch(
-        "http://localhost:5000/users",
+        "https://bhromonkari-server.vercel.app/users",
         {
           method: "POST",
           headers: {
@@ -94,7 +94,7 @@ const AuthProviders = ({ children }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/${email}`,
+        `https://bhromonkari-server.vercel.app/${email}`,
         {
           method: "PUT",
           headers: {
@@ -120,7 +120,7 @@ const AuthProviders = ({ children }) => {
 
   const fetchUserData = async (email) => {
     try {
-      const response = await fetch("http://localhost:5000/users");
+      const response = await fetch("https://bhromonkari-server.vercel.app/users");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

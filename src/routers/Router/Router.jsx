@@ -12,7 +12,8 @@ import BudgetPlan from "../../Page/BudgetPlan/BudgetPlan";
 import Profile from "../../Page/Profile/Profile";
 import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 import Dashboard from "../../layout/Dashboard/Dashboard";
-import SingleTourPlacePage from "../../components/SingleTourPlacePage/SingleTourPlacePage";
+import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
+import SingleHotel from "../../components/singleHotel/singleHotel";
 
 
 export const router = createBrowserRouter([
@@ -46,7 +47,11 @@ export const router = createBrowserRouter([
             }, 
             {
                 path: 'tour-places/:_id',
-                element: <SingleTourPlacePage/>
+                element: <SingleTourPlace></SingleTourPlace>
+            },
+            {
+                path: 'hotel/:_id',
+                element: <SingleHotel></SingleHotel>
             }
 
         ]
