@@ -19,7 +19,6 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
-  
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
@@ -51,16 +50,13 @@ const AuthProviders = ({ children }) => {
       });
 
       const saveUser = { name, email, photoUrl };
-      const response = await fetch(
-        "https://bhromonkari-server.vercel.app/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(saveUser),
-        }
-      );
+      const response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -90,27 +86,50 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  const updateUser = async (name, photoUrl, email) => {
+  const updateUser = async (email, updates) => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `https://bhromonkari-server.vercel.app/${email}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, photoURL: photoUrl }),
-        }
-      );
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("No user is currently logged in.");
+      }
+
+      // Update the user in the backend
+      const response = await fetch(`http://localhost:5000/users/${email}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updates),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const updatedUser = await response.json();
+      setUser(updatedUser);
+
+      Swal.fire({
+        icon: "success",
+        title: "Profile Updated",
+        text: "Your profile has been updated successfully!",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+
       return updatedUser;
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: "Please try again later.",
+      });
       console.error("Error updating user:", error.message);
       throw error;
     } finally {
@@ -120,12 +139,12 @@ const AuthProviders = ({ children }) => {
 
   const fetchUserData = async (email) => {
     try {
-      const response = await fetch("https://bhromonkari-server.vercel.app/users");
+      const response = await fetch("http://localhost:5000/users");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const users = await response.json();
-      const userData = users.find(user => user.email === email);
+      const userData = users.find((user) => user.email === email);
       setUserData(userData);
       return userData;
     } catch (error) {

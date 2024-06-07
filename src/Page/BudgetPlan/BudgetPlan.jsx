@@ -28,7 +28,7 @@ const BudgetPlan = () => {
         };
 
         try {
-            const response = await fetch(`https://bhromonkari-server.vercel.app/users/${userEmail}/budget`, {
+            const response = await fetch(`http://localhost:5000/users/${userEmail}/budget`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

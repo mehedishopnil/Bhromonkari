@@ -10,7 +10,7 @@ const SingleHotel = () => {
     const fetchHotels = async () => {
       try {
         // Fetch hotels data from the server
-        const response = await axios.get(`https://bhromonkari-server.vercel.app/tour-places/${_id}/hotels`); // Update the URL as per your backend route
+        const response = await axios.get(`http://localhost:5000/tour-places/${_id}/hotels`); // Update the URL as per your backend route
         setHotels(response.data);
       } catch (error) {
         console.error('Error fetching hotels:', error);
