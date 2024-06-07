@@ -50,7 +50,7 @@ const AuthProviders = ({ children }) => {
       });
 
       const saveUser = { name, email, photoUrl };
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const AuthProviders = ({ children }) => {
       }
 
       // Update the user in the backend
-      const response = await fetch(`http://localhost:5000/users/${email}`, {
+      const response = await fetch(`https://bhromonkari-server.vercel.app/users/${email}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const AuthProviders = ({ children }) => {
 
   const fetchUserData = async (email) => {
     try {
-      const response = await fetch("http://localhost:5000/users");
+      const response = await fetch("https://bhromonkari-server.vercel.app/users");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -158,7 +158,7 @@ const AuthProviders = ({ children }) => {
   // Function to send budget data to the backend
   const budgetData = async (email, budgetData) => {
     try {
-      const response = await fetch("http://localhost:5000/tourist-wallet", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/tourist-wallet", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -183,7 +183,7 @@ const AuthProviders = ({ children }) => {
  //todays spending data 
   const todaysSpendingData = async (email, spendingData) => {
     try {
-      const response = await fetch("http://localhost:5000/regular-spending", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/regular-spending", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
