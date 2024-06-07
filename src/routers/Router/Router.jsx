@@ -13,7 +13,7 @@ import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 import Dashboard from "../../layout/Dashboard/Dashboard";
 import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
 import SingleHotel from "../../components/singleHotel/singleHotel";
-import SingleTourGuide from "../../components/singleTourGuide/singleTourGuide";
+import SingleTourGuide from "../../components/SingleTourGuide/SingleTourGuide";
 
 export const router = createBrowserRouter([
     {
