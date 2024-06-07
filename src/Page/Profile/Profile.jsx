@@ -28,14 +28,14 @@ const Profile = () => {
             </div>
             <div className="py-2">
               <div className="block mt-1 text-lg leading-tight font-semibold text-gray-900">
-                <h1>{name}</h1>
+                <h1 className="text-xl font-bold">{name}</h1>
               </div>
               <div className="mt-4">
-                <div>
-                  <p className="font-semibold text-gray-500">Email: {email}</p>
-                  <p className="font-semibold text-gray-500">Address: {address}</p>
-                  <p className="font-semibold text-gray-500">Phone: {phone}</p>
-                  <p className="font-semibold text-gray-500">Website: {website}</p>
+                <div className="space-y-2">
+                  <p className="font-semibold text-gray-500"><span className="font-bold">Email: </span> {email}</p>
+                  <p className="font-semibold text-gray-500"><span className="font-bold">Address: </span> {address}</p>
+                  <p className="font-semibold text-gray-500"><span className="font-bold">Phone: </span> {phone}</p>
+                  <p className="font-semibold text-gray-500"><span className="font-bold">Website: </span> {website}</p>
                 </div>
               </div>
             </div>
