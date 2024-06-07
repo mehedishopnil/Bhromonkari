@@ -13,6 +13,7 @@ import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 import Dashboard from "../../layout/Dashboard/Dashboard";
 import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
 import SingleHotel from "../../components/singleHotel/singleHotel";
+import SingleTourGuide from "../../components/singleTourGuide/singleTourGuide";
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
             {
                 path: 'hotel/:_id',
                 element: <SingleHotel></SingleHotel>
+            },
+            {
+                path: 'tour-guide/:_id',
+                element: <SingleTourGuide></SingleTourGuide>
             }
         ]
     },

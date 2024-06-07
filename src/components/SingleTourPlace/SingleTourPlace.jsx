@@ -45,7 +45,7 @@ const SingleTourPlace = () => {
           <div className="border rounded-lg p-4 mb-4 shadow-md">
             <h3 className="text-xl font-semibold mb-2">Tour Guide</h3>
             <p>If you need a tour guide, please contact us for assistance.</p>
-            <button className="btn btn-primary bg-[#e0a352] mt-2">Request Tour Guide</button>
+            <Link to={`/tour-guide/${_id}`}><button className="btn btn-primary bg-[#e0a352] mt-2">Request Tour Guide</button></Link>
           </div>
         </div>
       </div>
