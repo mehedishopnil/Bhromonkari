@@ -178,6 +178,32 @@ const AuthProviders = ({ children }) => {
       throw error;
     }
   };
+
+
+ //todays spending data 
+  const todaysSpendingData = async (email, spendingData) => {
+    try {
+      const response = await fetch("http://localhost:5000/regular-spending", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, spendingData }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      // Log success message if spending data is sent successfully
+      console.log("Spending data sent successfully!");
+    } catch (error) {
+      // Log error if there's an error sending spending data
+      console.error("Error sending spending data:", error.message);
+      throw error;
+    }
+  };
+  
   
 
 
@@ -206,6 +232,7 @@ const AuthProviders = ({ children }) => {
     LogOut,
     userData,
     budgetData,
+    todaysSpendingData
   };
 
   return (
