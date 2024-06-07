@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main/Main";
 import Home from "../../Page/Home/Home";
-
 import TourPlan from "../../Page/TourPlan/TourPlan";
 import Bookings from "../../Page/Bookings/Bookings";
 import Login from "../../Page/Login/Login";
@@ -14,7 +13,6 @@ import CategoryPage from "../../Page/CategoryPage/CategoryPage";
 import Dashboard from "../../layout/Dashboard/Dashboard";
 import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
 import SingleHotel from "../../components/singleHotel/singleHotel";
-
 
 export const router = createBrowserRouter([
     {
@@ -53,10 +51,8 @@ export const router = createBrowserRouter([
                 path: 'hotel/:_id',
                 element: <SingleHotel></SingleHotel>
             }
-
         ]
     },
-
     {
         path: 'dashboard',
         element: <Dashboard></Dashboard>,
@@ -76,8 +72,7 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile></Profile>
-            },
-            
+            }
         ]
     }
 ]);

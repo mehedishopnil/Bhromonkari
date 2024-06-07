@@ -38,7 +38,7 @@ const SingleTourPlace = () => {
         <div>
           <div className="border rounded-lg p-4 mb-4 shadow-md">
             <h3 className="text-xl font-semibold mb-2">Nearest Hotels and Resorts</h3>
-            <Link to={`/tour-places/${_id}/hotels`}>
+            <Link to={`/hotel/${_id}`}>
             <button className="btn btn-primary bg-[#e0a352] mt-2">View Hotels</button>
             </Link>
           </div>
