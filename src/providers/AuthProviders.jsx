@@ -153,6 +153,34 @@ const AuthProviders = ({ children }) => {
     }
   };
 
+
+  //Send to the backend Budget Amount
+  // Function to send budget data to the backend
+  const budgetData = async (email, budgetData) => {
+    try {
+      const response = await fetch("http://localhost:5000/tourist-wallet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, ...budgetData }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      // Log success message if budget data is sent successfully
+      console.log("Budget data sent successfully!");
+    } catch (error) {
+      // Log error if there's an error sending budget data
+      console.error("Error sending budget data:", error.message);
+      throw error;
+    }
+  };
+  
+
+
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -177,6 +205,7 @@ const AuthProviders = ({ children }) => {
     googleLogin,
     LogOut,
     userData,
+    budgetData,
   };
 
   return (
