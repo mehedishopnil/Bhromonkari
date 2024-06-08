@@ -21,7 +21,7 @@ const AuthProviders = ({ children }) => {
   const [budgetData, setBudgetData] = useState(null);
   const [spendingData, setSpendingData] = useState(null);
 
-  console.log(spendingData)
+  console.log(budgetData  )
 
   // Listen for changes in authentication state
   useEffect(() => {

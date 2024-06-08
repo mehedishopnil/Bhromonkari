@@ -14,6 +14,7 @@ import Dashboard from "../../layout/Dashboard/Dashboard";
 import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
 import SingleHotel from "../../components/singleHotel/singleHotel";
 import SingleTourGuide from "../../components/SingleTourGuide/SingleTourGuide";
+import TestPage from "../../Page/TestPage";
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
             {
                 path: 'tour-guide/:_id',
                 element: <SingleTourGuide></SingleTourGuide>
+            },
+            {
+                path: 'test',
+                element: <TestPage></TestPage>
             }
         ]
     },
