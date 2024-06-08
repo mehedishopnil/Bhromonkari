@@ -18,7 +18,7 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [getBudgetData, setGetBudgetData] = useState(null);
-  const [getSpendingData, setGetSpendingData] = useState(null);
+  const [getSpendingData, setGetSpendingData] = useState([]);
 
 
   useEffect(() => {
@@ -201,21 +201,21 @@ const AuthProviders = ({ children }) => {
 
   const fetchSpendingData = async (email) => {
     try {
-      console.log('Fetching budget data for:', email);
+      console.log('Fetching spending data for:', email);
       const response = await fetch(`https://bhromonkari-server.vercel.app/regular-spending?email=${email}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
 
       if (!response.ok) {
-        throw new Error(`Error fetching budget data: HTTP status ${response.status}`);
+        throw new Error(`Error fetching spending data: HTTP status ${response.status}`);
       }
 
       const data = await response.json();
       setGetSpendingData(data);
-      console.log("Budget data retrieved successfully!", data);
+      console.log("Spending data retrieved successfully!", data);
     } catch (error) {
-      console.error("Error retrieving budget data:", error.message);
+      console.error("Error retrieving spending data:", error.message);
     }
   };
 
@@ -230,7 +230,7 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  
+
 
   const googleLogin = () => {
     setLoading(true);
