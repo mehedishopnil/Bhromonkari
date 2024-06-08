@@ -4,11 +4,11 @@ import EmptyData from "../../components/EmptyData";
 import { Link } from "react-router-dom";
 
 const Expanse = () => {
-  const { spendingData } = useContext(AuthContext);
-  console.log(spendingData);
+  const { getSpendingData } = useContext(AuthContext);
+  console.log(getSpendingData);
 
   // Handle the case when budgetData is null
-  if (!spendingData) {
+  if (!getSpendingData) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
         <EmptyData />
