@@ -3,8 +3,8 @@ import { AuthContext } from "../../providers/AuthProviders";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Link } from "react-router-dom";
 import { FaBeerMugEmpty } from "react-icons/fa6";
-import emptyBucket from "../../../public/wired-lineal-139-basket.gif"
 import Loading from "../../components/Loading";
+import EmptyData from "../../components/EmptyData";
 
 const Overview = () => {
   const { user, budgetData } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const Overview = () => {
   if (!budgetData) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
-        <img className="w-1/6" src={emptyBucket} alt="" />
+        <EmptyData/>
         <div className="text-center">
           <h2 className="text-xl mb-10">You didn't input your budget plan yet.</h2>
           <Link to="../budget-plan" className=" border-2 border-blue-300 rounded px-5 py-3 hover:bg-blue-300 ">
