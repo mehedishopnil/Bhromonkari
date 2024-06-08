@@ -92,7 +92,7 @@ const Overview = () => {
               <span className="bg-[#FF8042] text-white rounded-full px-2 py-1">Transport Budget: ${transportBudget}</span>
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-center text-gray-600 uppercase mt-4">Your Tour Budget Chart</h1>
+          <h1 className="text-xl font-bold text-center text-gray-500 uppercase mt-4">Your Tour Budget Chart</h1>
         </div>
       </div>
     </div>

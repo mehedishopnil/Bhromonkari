@@ -7,11 +7,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { createContext, useState, useEffect } from "react";
-import app from "../firebase/firebase.config"; // Ensure this path is correct
+import app from "../firebase/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
 
-// Create a context for authentication
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
@@ -19,11 +18,8 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [getBudgetData, setGetBudgetData] = useState(null);
-  const [spendingData, setSpendingData] = useState(null);
 
-  console.log('Current Budget Data:', getBudgetData);
 
-  // Listen for changes in authentication state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
@@ -41,12 +37,11 @@ const AuthProviders = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // Fetch user data from the backend
   const fetchUserData = async (email) => {
     try {
       const response = await fetch(`https://bhromonkari-server.vercel.app/users?email=${email}`);
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`Error fetching user data: HTTP status ${response.status}`);
       }
       const users = await response.json();
       return users.find((user) => user.email === email);
@@ -56,7 +51,6 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  // Create a new user with email and password
   const createUser = async (name, photoUrl, email, password) => {
     setLoading(true);
     try {
@@ -70,7 +64,7 @@ const AuthProviders = ({ children }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`Error creating user: HTTP status ${response.status}`);
       }
 
       const userCreateData = await response.json();
@@ -92,7 +86,6 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  // Update user information
   const updateUser = async (email, updates) => {
     try {
       setLoading(true);
@@ -103,7 +96,7 @@ const AuthProviders = ({ children }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`Error updating user: HTTP status ${response.status}`);
       }
 
       const updatedUser = await response.json();
@@ -132,7 +125,6 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  // Send budget data to the backend
   const sendBudgetData = async (email, budgetData) => {
     try {
       console.log('Sending budget data for:', email);
@@ -143,7 +135,7 @@ const AuthProviders = ({ children }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`Error sending budget data: HTTP status ${response.status}`);
       }
       console.log("Budget data sent successfully!");
     } catch (error) {
@@ -152,7 +144,30 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  // Get budget data from the backend
+
+  const sendSpendingData = async (email, spendingData) => {
+    try {
+      console.log('Sending spending data for:', email);
+      console.log('Spending data:', spendingData);
+  
+      const response = await fetch("https://bhromonkari-server.vercel.app/regular-spending", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, ...spendingData }), // Include email in the data
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error sending spending data: HTTP status ${response.status}`);
+      }
+      console.log("Spending data sent successfully!");
+    } catch (error) {
+      console.error("Error sending spending data:", error.message);
+      throw error;
+    }
+  };
+
+
+  
   const fetchBudgetData = async (email) => {
     try {
       console.log('Fetching budget data for:', email);
@@ -162,84 +177,35 @@ const AuthProviders = ({ children }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`Error fetching budget data: HTTP status ${response.status}`);
       }
 
       const data = await response.json();
-      setGetBudgetData(data); // Set the fetched data
+      setGetBudgetData(data);
       console.log("Budget data retrieved successfully!", data);
     } catch (error) {
       console.error("Error retrieving budget data:", error.message);
     }
   };
 
-  // useEffect to fetch data when the user changes
+
+
   useEffect(() => {
     if (user && user.email) {
       fetchBudgetData(user.email);
     }
   }, [user]);
 
-  // Send today's spending data to the backend
-  const sendTodaysSpendingData = async (email, spendingData) => {
-    try {
-      const response = await fetch("https://bhromonkari-server.vercel.app/regular-spending", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, spendingData }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      console.log("Spending data sent successfully!");
-    } catch (error) {
-      console.error("Error sending spending data:", error.message);
-      throw error;
-    }
-  };
-
-  // Get today's spending data from the backend
-  const fetchSpendingData = async (email) => {
-    try {
-      console.log('Fetching spending data for:', email);
-      const response = await fetch(`https://bhromonkari-server.vercel.app/regular-spending?email=${email}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setSpendingData(data); // Set the fetched data
-      console.log("Spending data retrieved successfully!", data);
-    } catch (error) {
-      console.error("Error fetching spending data:", error.message);
-    }
-  };
-
-  // useEffect to fetch data when the user changes
-  useEffect(() => {
-    if (user && user.email) {
-      fetchSpendingData(user.email);
-    }
-  }, [user]);
-
-  // Sign in with email and password
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Sign in with Google
   const googleLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, new GoogleAuthProvider());
   };
 
-  // Sign out
   const LogOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -254,10 +220,9 @@ const AuthProviders = ({ children }) => {
     googleLogin,
     LogOut,
     sendBudgetData,
+    sendSpendingData,
     fetchBudgetData,
-    sendTodaysSpendingData,
     getBudgetData,
-    spendingData,
   };
 
   return (
