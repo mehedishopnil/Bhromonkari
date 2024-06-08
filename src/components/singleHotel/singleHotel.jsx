@@ -13,7 +13,7 @@ const SingleHotel = () => {
     const fetchHotels = async () => {
       try {
         // Fetch hotels data from the server using the tour place ID
-        const response = await axios.get(`http://localhost:5000/tour-places/${_id}/hotel`);
+        const response = await axios.get(`https://bhromonkari-server.vercel.app/tour-places/${_id}/hotel`);
         setHotels(response.data);
         setLoading(false);
       } catch (error) {

@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import ProfileUpdateModal from "./ProfileUpdateModal";
 
 const Profile = () => {
-  const { user, userData } = useContext(AuthContext);
+  const { user,  } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  const { name, email, photoUrl, address, phone, website } = userData;
+  const { name, email, photoUrl, address, phone, website } = user;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -49,7 +49,7 @@ const Profile = () => {
       </div>
       {isModalOpen && (
         <ProfileUpdateModal
-          userData={userData}
+          userData={user}
           onClose={() => setIsModalOpen(false)}
         />
       )}
