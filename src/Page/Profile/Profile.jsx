@@ -3,13 +3,14 @@ import { AuthContext } from "../../providers/AuthProviders";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ProfileUpdateModal from "./ProfileUpdateModal";
+import Loading from "../../components/Loading";
 
 const Profile = () => {
   const { user,  } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   const { name, email, photoUrl, address, phone, website } = user;

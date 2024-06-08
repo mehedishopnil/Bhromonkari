@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Loading from '../Loading';
 
 const SingleHotel = () => {
   const [hotels, setHotels] = useState([]);
@@ -27,7 +28,7 @@ const SingleHotel = () => {
   }, [_id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   if (error) {

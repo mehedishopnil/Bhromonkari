@@ -1,6 +1,7 @@
 import axios from 'axios';
 import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Loading from '../Loading';
 
 const SingleTourGuide = () => {
   const { _id } = useParams();
@@ -26,7 +27,7 @@ const SingleTourGuide = () => {
   }
 
   if (!tourGuides.length) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   return (

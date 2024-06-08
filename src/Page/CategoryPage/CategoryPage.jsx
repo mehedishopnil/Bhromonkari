@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate, Navigate, useLocation, Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
+import Loading from '../../components/Loading';
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -49,7 +50,7 @@ const CategoryPage = () => {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   return (

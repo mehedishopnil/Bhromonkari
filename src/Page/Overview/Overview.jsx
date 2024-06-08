@@ -4,13 +4,14 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Link } from "react-router-dom";
 import { FaBeerMugEmpty } from "react-icons/fa6";
 import emptyBucket from "../../../public/wired-lineal-139-basket.gif"
+import Loading from "../../components/Loading";
 
 const Overview = () => {
   const { user, budgetData } = useContext(AuthContext);
 
   // Handle the case when user is null
   if (!user) {
-    return <div>Loading...</div>;
+    return <div><Loading></Loading></div>;
   }
 
   // Handle the case when budgetData is null

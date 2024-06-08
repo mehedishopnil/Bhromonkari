@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Loading from '../Loading';
 
 const SingleTourPlace = () => {
   const { _id } = useParams();
@@ -20,7 +21,7 @@ const SingleTourPlace = () => {
   }, [_id]);
 
   if (!tourPlace) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   return (
