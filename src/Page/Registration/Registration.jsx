@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 
@@ -14,12 +14,11 @@ const Registration = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const website = form.website.value;
     const email = form.email.value;
     const password = form.password.value;
     const photoUrl = form.photoUrl.value;
 
-    createUser(name, photoUrl, website, email, password)
+    createUser(name, photoUrl, email, password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
@@ -62,18 +61,6 @@ const Registration = () => {
                   type="text"
                   placeholder="input your photo url"
                   name="photoUrl"
-                  className="input input-bordered"
-                />
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Website</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="input your Web link"
-                  name="website"
                   className="input input-bordered"
                 />
               </div>
