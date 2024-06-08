@@ -4,8 +4,8 @@ import { AuthContext } from '../../providers/AuthProviders';
 
 
 const BudgetChart = () => {
-     const { user, budgetData} = useContext(AuthContext);
-     const { hotelBudget, mealBudget, othersBudget, transportBudget, totalBudget } = budgetData;
+     const { user, getBudgetData} = useContext(AuthContext);
+     const { hotelBudget, mealBudget, othersBudget, transportBudget, totalBudget } = getBudgetData;
      console.log(hotelBudget, mealBudget, othersBudget, transportBudget, totalBudget)
   const data = [
     { name: 'Group A', value: parseFloat(hotelBudget) },

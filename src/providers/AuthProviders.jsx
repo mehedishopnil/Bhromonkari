@@ -18,17 +18,21 @@ const auth = getAuth(app);
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [budgetData, setBudgetData] = useState(null);
+  const [getBudgetData, setGetBudgetData] = useState(null);
   const [spendingData, setSpendingData] = useState(null);
 
-  console.log(budgetData  )
+  console.log('Current Budget Data:', getBudgetData);
 
   // Listen for changes in authentication state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
-        const userData = await fetchUserData(currentUser.email);
-        setUser(userData);
+        try {
+          const userData = await fetchUserData(currentUser.email);
+          setUser(userData);
+        } catch (error) {
+          console.error('Error setting user data:', error);
+        }
       } else {
         setUser(null);
       }
@@ -131,6 +135,7 @@ const AuthProviders = ({ children }) => {
   // Send budget data to the backend
   const sendBudgetData = async (email, budgetData) => {
     try {
+      console.log('Sending budget data for:', email);
       const response = await fetch("https://bhromonkari-server.vercel.app/tourist-wallet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -147,33 +152,33 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-// Get budget data from the backend
-const fetchBudgetData = async (email) => {
-  try {
-    const response = await fetch(`https://bhromonkari-server.vercel.app/tourist-wallet?email=${email}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+  // Get budget data from the backend
+  const fetchBudgetData = async (email) => {
+    try {
+      console.log('Fetching budget data for:', email);
+      const response = await fetch(`https://bhromonkari-server.vercel.app/tourist-wallet?email=${email}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setGetBudgetData(data); // Set the fetched data
+      console.log("Budget data retrieved successfully!", data);
+    } catch (error) {
+      console.error("Error retrieving budget data:", error.message);
     }
+  };
 
-    const data = await response.json();
-    setBudgetData(data); // Set the fetched data
-    console.log("Budget data retrieved successfully!", data);
-  } catch (error) {
-    console.error("Error retrieving budget data:", error.message);
-  }
-};
-
-// useEffect to fetch data when the user changes
-useEffect(() => {
-  if (user && user.email) {
-    fetchBudgetData(user.email);
-  }
-}, [user]);
-
+  // useEffect to fetch data when the user changes
+  useEffect(() => {
+    if (user && user.email) {
+      fetchBudgetData(user.email);
+    }
+  }, [user]);
 
   // Send today's spending data to the backend
   const sendTodaysSpendingData = async (email, spendingData) => {
@@ -194,11 +199,10 @@ useEffect(() => {
     }
   };
 
-
-
   // Get today's spending data from the backend
   const fetchSpendingData = async (email) => {
     try {
+      console.log('Fetching spending data for:', email);
       const response = await fetch(`https://bhromonkari-server.vercel.app/regular-spending?email=${email}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -222,8 +226,6 @@ useEffect(() => {
       fetchSpendingData(user.email);
     }
   }, [user]);
-
-
 
   // Sign in with email and password
   const login = (email, password) => {
@@ -254,7 +256,7 @@ useEffect(() => {
     sendBudgetData,
     fetchBudgetData,
     sendTodaysSpendingData,
-    budgetData,
+    getBudgetData,
     spendingData,
   };
 

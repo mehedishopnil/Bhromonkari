@@ -31,7 +31,7 @@ const Header = () => {
           <NavLink to='/' label='Home' isActive={isActive} />
           <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
           <NavLink to='/bookings' label='Bookings' isActive={isActive} />
-          {user && <NavLink to='/dashboard' label='Dashboard' isActive={isActive} />}
+          {user && <NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} />}
         </div>
 
         {/* Login and Registration or user Info and Logout */}

@@ -17,7 +17,7 @@ const Profile = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="w-10/12 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="w-10/12 border mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         <div className="flex justify-between space-x-5">
           <div className="flex space-x-5">
             <div className="md:flex-shrink-0">
