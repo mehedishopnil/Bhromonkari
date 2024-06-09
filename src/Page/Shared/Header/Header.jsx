@@ -28,10 +28,14 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <div className='hidden md:flex md:items-center md:space-x-10'>
-          <NavLink to='/' label='Home' isActive={isActive} />
-          <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
-          <NavLink to='/bookings' label='Bookings' isActive={isActive} />
-          {user && <NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} />}
+          {user && (
+            <>
+              <NavLink to='/' label='Home' isActive={isActive} />
+              <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
+              <NavLink to='/bookings' label='Bookings' isActive={isActive} />
+              <NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} />
+            </>
+          )}
         </div>
 
         {/* Login and Registration or user Info and Logout */}
@@ -70,10 +74,14 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className='md:hidden mt-4'>
           <ul className='space-y-4'>
-            <li><NavLink to='/' label='Home' isActive={isActive} onClick={closeMobileMenu} /></li>
-            <li><NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} onClick={closeMobileMenu} /></li>
-            <li><NavLink to='/bookings' label='Bookings' isActive={isActive} onClick={closeMobileMenu} /></li>
-            {user && <li><NavLink to='/dashboard' label='Dashboard' isActive={isActive} onClick={closeMobileMenu} /></li>}
+            {user && (
+              <>
+                <li><NavLink to='/' label='Home' isActive={isActive} onClick={closeMobileMenu} /></li>
+                <li><NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} onClick={closeMobileMenu} /></li>
+                <li><NavLink to='/bookings' label='Bookings' isActive={isActive} onClick={closeMobileMenu} /></li>
+                <li><NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} onClick={closeMobileMenu} /></li>
+              </>
+            )}
           </ul>
         </div>
       )}
