@@ -27,9 +27,14 @@ const Profile = () => {
     setTotalSpending(total);
   }, [spendingDataArray]);
 
+  // Ensure getBudgetData is available
+  if (!getBudgetData) {
+    return <div><Loading /></div>;
+  }
+
   const { totalBudget } = getBudgetData;
 
-  if (!user) {
+  if (!user || isLoading) {
     return <div><Loading /></div>;
   }
 
@@ -76,18 +81,21 @@ const Profile = () => {
       )}
       <div className="card bg-slate-100 w-1/2 mt-10 border py-5 ">
         <h1 className="text-center">Your Tour Budget: <span className="font-bold">{totalBudget} Taka</span></h1>
-        
       </div>
 
       <div className="flex flex-col items-center justify-center card bg-slate-100 w-1/2 mt-4 border py-5 ">
         <h1 className="text-center">Your Total Spending: <span className="font-bold">{totalSpending} Taka</span></h1>
         {totalSpending > totalBudget && (
-          <div className="flex gap-3 text-center text-red-500 mt-4">
-          <AiFillAlert className="text-xl" />  You are crossing your budget limit. Be careful on spending.
+          <div className="flex gap-3 text-center text-red-500 ">
+            <AiFillAlert className="text-xl" /> You are crossing your budget limit. Be careful on spending.
+          </div>
+        )}
+        {totalSpending < totalBudget && (
+          <div className="flex gap-3 text-center text-green-500 ">
+            <AiFillAlert className="text-xl" /> You are in a safe spending position.
           </div>
         )}
       </div>
-
     </div>
   );
 };

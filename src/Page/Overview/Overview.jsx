@@ -61,7 +61,7 @@ const Overview = () => {
       <div className="flex flex-col items-center w-full h-full">
         <h2 className="text-center text-3xl">Welcome <span className="font-bold">{user.name}</span></h2>
         <div className="flex justify-center items-center space-x-2 mt-4">
-          <span className="bg-[#8c40e4] text-xl text-white rounded-full px-3 py-2">Total Budget: ${totalBudget}</span>
+          <span className="bg-[#8c40e4] text-xl text-white rounded-full px-3 py-2">Total Budget: {totalBudget} Taka</span>
         </div>
         <div className="card shadow-lg p-6 border w-full md:w-10/12 lg:w-10/12 mt-4">
           <div className="w-full grid grid-cols-1 lg:grid-cols-5 gap-4 items-center">
@@ -86,10 +86,10 @@ const Overview = () => {
               </ResponsiveContainer>
             </div>
             <div className="w-1/2 flex flex-col space-y-5 text-sm lg:col-span-2">
-              <span className="bg-[#0088FE] text-white rounded-full px-2 py-1">Hotel Budget: ${hotelBudget}</span>
-              <span className="bg-[#00C49F] text-white rounded-full px-2 py-1">Meal Budget: ${mealBudget}</span>
-              <span className="bg-[#FFBB28] text-white rounded-full px-2 py-1">Others Budget: ${othersBudget}</span>
-              <span className="bg-[#FF8042] text-white rounded-full px-2 py-1">Transport Budget: ${transportBudget}</span>
+              <span className="bg-[#0088FE] text-white rounded-full px-2 py-1">Hotel Budget: <strong>{hotelBudget} Taka</strong> </span>
+              <span className="bg-[#00C49F] text-white rounded-full px-2 py-1">Meal Budget: <strong>{mealBudget} Taka</strong></span>
+              <span className="bg-[#FFBB28] text-white rounded-full px-2 py-1">Others Budget: <strong>{othersBudget} Taka</strong></span>
+              <span className="bg-[#FF8042] text-white rounded-full px-2 py-1">Transport Budget: <strong>{transportBudget} Taka</strong></span>
             </div>
           </div>
           <h1 className="text-xl font-bold text-center text-gray-500 uppercase mt-4">Your Tour Budget Chart</h1>
