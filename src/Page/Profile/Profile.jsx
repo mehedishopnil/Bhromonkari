@@ -73,12 +73,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {isModalOpen && (
-        <ProfileUpdateModal
-          userData={user}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
+      
       <div className="card bg-slate-100 w-1/2 mt-10 border py-5 ">
         <h1 className="text-center">Your Tour Budget: <span className="font-bold">{totalBudget} Taka</span></h1>
       </div>
@@ -96,6 +91,12 @@ const Profile = () => {
           </div>
         )}
       </div>
+      {isModalOpen && (
+        <ProfileUpdateModal
+          userData={user}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
