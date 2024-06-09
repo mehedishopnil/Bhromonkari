@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ProfileUpdateModal from "./ProfileUpdateModal";
 import Loading from "../../components/Loading";
+import { AiFillAlert } from "react-icons/ai";
 
 const Profile = () => {
   const { user, getBudgetData, getSpendingData } = useContext(AuthContext);
@@ -78,11 +79,11 @@ const Profile = () => {
         
       </div>
 
-      <div className="card bg-slate-100 w-1/2 mt-4 border py-5 ">
+      <div className="flex flex-col items-center justify-center card bg-slate-100 w-1/2 mt-4 border py-5 ">
         <h1 className="text-center">Your Total Spending: <span className="font-bold">{totalSpending} Taka</span></h1>
         {totalSpending > totalBudget && (
-          <div className="text-center text-red-500 mt-4">
-            You are crossing your budget. Keep concern on spending.
+          <div className="flex gap-3 text-center text-red-500 mt-4">
+          <AiFillAlert className="text-xl" />  You are crossing your budget limit. Be careful on spending.
           </div>
         )}
       </div>
