@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
+import { FcGoogle } from "react-icons/fc";
+import Swal from 'sweetalert2';
 
 const Registration = () => {
   const [isRegistration, setIsRegistration] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, googleLogin } = useContext(AuthContext);
 
   const from = location.state?.from?.pathname || "/";
 
@@ -28,6 +30,42 @@ const Registration = () => {
       .catch((error) => {
         console.error("Error during registration:", error.message);
       });
+  };
+
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLogin();
+      const user = result.user;
+      console.log(user);
+      Swal.fire({
+        title: "Successfully Logged In with Google",
+        showClass: {
+          popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `,
+        },
+        hideClass: {
+          popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `,
+        },
+      });
+      isRegistration(true);
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error logging in with Google",
+        footer: "Please try again later",
+      });
+    }
   };
 
   return (
@@ -92,6 +130,21 @@ const Registration = () => {
               </p>
             </div>
           </form>
+
+          
+          <div className="divider">OR</div> {/* Divider between login methods */}
+
+{/* Google Login */}
+    <div className="flex items-center form-control mb-4">
+      <button
+        onClick={handleGoogleLogin}
+        className="btn bg-[#4285F4] text-white hover:bg-[#357ae8] flex items-center justify-center"
+      >
+        <FcGoogle className="mr-2 text-2xl" /> {/* Google icon */}
+        Register with Google
+      </button>
+    </div>
+
         </div>
 
         <div className="text-center lg:text-left">
