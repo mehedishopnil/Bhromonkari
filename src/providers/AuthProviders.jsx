@@ -20,7 +20,6 @@ const AuthProviders = ({ children }) => {
   const [getBudgetData, setGetBudgetData] = useState(null);
   const [getSpendingData, setGetSpendingData] = useState([]);
 
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
@@ -145,7 +144,6 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-
   const sendSpendingData = async (email, spendingData) => {
     try {
       console.log('Sending spending data for:', email);
@@ -167,8 +165,6 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-
-  
   const fetchBudgetData = async (email) => {
     try {
       console.log('Fetching budget data for:', email);
@@ -189,15 +185,11 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-
-
   useEffect(() => {
     if (user && user.email) {
       fetchBudgetData(user.email);
     }
   }, [user]);
-
-
 
   const fetchSpendingData = async (email) => {
     try {
@@ -230,11 +222,45 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-
-
-  const googleLogin = () => {
+  const googleLogin = async () => {
     setLoading(true);
-    return signInWithPopup(auth, new GoogleAuthProvider());
+    try {
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      const name = user.displayName;
+      const photoUrl = user.photoURL;
+      const email = user.email;
+
+      const saveUser = { name, email, photoUrl };
+      const response = await fetch("https://bhromonkari-server.vercel.app/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(saveUser),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error saving user: HTTP status ${response.status}`);
+      }
+
+      const userCreateData = await response.json();
+      if (userCreateData.insertedId) {
+        Swal.fire({
+          title: "Login Success",
+          showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
+          hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" },
+        });
+      }
+
+      setUser(user);
+      return result;
+    } catch (error) {
+      console.error("Error logging in with Google:", error.message);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const LogOut = () => {

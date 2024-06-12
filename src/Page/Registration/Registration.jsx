@@ -16,9 +16,8 @@ const Registration = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const photoUrl = form.photoUrl.value;
 
-    createUser(name, photoUrl, email, password)
+    createUser(name, email, password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
@@ -49,18 +48,6 @@ const Registration = () => {
                   type="text"
                   placeholder="input your name"
                   name="name"
-                  className="input input-bordered"
-                />
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo url</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="input your photo url"
-                  name="photoUrl"
                   className="input input-bordered"
                 />
               </div>

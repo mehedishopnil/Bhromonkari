@@ -27,7 +27,7 @@ const BudgetPlanningForm = ({ onClose }) => {
       }, 0);
 
       // Add total budget to formData
-      const dataToSend = {
+      const datanToSend = {
         ...formData,
         totalBudget: totalBudget.toFixed(2) // Round to 2 decimal places
       };

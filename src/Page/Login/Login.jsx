@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate, } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [isLoggedin, setIsLoggedIn] = useState(false);
 
-  const { login } = useContext(AuthContext);
+  const { login, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,11 +19,47 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     login(email, password)
-    .then((result) =>{
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        Swal.fire({
+          title: "Successfully Logged In",
+          showClass: {
+            popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `,
+          },
+          hideClass: {
+            popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `,
+          },
+        });
+        setIsLoggedIn(true);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Wrong Email or Password",
+          footer: "Please enter correct Email or Password",
+        });
+      });
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLogin();
       const user = result.user;
       console.log(user);
       Swal.fire({
-        title: "Successfully Logged In ",
+        title: "Successfully Logged In with Google",
         showClass: {
           popup: `
           animate__animated
@@ -39,34 +76,26 @@ const Login = () => {
         },
       });
       setIsLoggedIn(true);
-      navigate(from , {replace: true});
-    })
-    .catch ((error) =>{
+      navigate(from, { replace: true });
+    } catch (error) {
       console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Wrong Email or Password",
-        footer: "Please enter correct Email or Password",
+        text: "Error logging in with Google",
+        footer: "Please try again later",
       });
-    })
+    }
+  };
 
-  }
-
-
-  
   return (
-    <div
-      className=" flex justify-center items-center h-full  bg-base-100"
-    >
-      <div
-        className="hero w-full h-auto p-10  rounded bg-base-200"
-      >
+    <div className="flex justify-center items-center h-full bg-base-100">
+      <div className="hero w-full h-auto p-10 rounded bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <h1 className="text-center text-2xl font-bold pt-4">LogIn</h1>
 
-            <form onSubmit={handleLogin}  className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <div>
                 <div className="form-control">
                   <label className="label">
@@ -100,19 +129,6 @@ const Login = () => {
                     </a>
                   </label>
                 </div>
-                <div className="">
-                  <label className="text-[#D1A054]">
-                    
-                  </label>
-                  <input
-                    type="text"
-                    
-                    placeholder="type the captcha"
-                    className="input input-bordered w-full"
-                  />
-                </div>
-
-                {/* TODO: here need to disable */}
                 <div className="form-control mt-6">
                   <input
                     type="submit"
@@ -131,13 +147,23 @@ const Login = () => {
                   </Link>
                 </p>
               </div>
-
-              
             </form>
+
+            <div className="divider">OR</div> {/* Divider between login methods */}
+
+            <div className="flex items-center form-control mb-4">
+              <button
+                onClick={handleGoogleLogin}
+                className="btn bg-[#4285F4] text-white hover:bg-[#357ae8] flex items-center justify-center"
+              >
+                <FcGoogle className="mr-2 text-2xl" /> {/* Google icon */}
+                Login with Google
+              </button>
+            </div>
           </div>
 
           <div className="text-center lg:text-left">
-            <img src='' alt="" />
+            <img src="" alt="" />
           </div>
         </div>
       </div>
