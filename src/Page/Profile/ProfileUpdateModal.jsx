@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 const ProfileUpdateModal = ({ userData, onClose }) => {
   const { updateUser } = useContext(AuthContext);
+  const [photoUrl, setPhotoUrl] = useState(userData.photoUrl || "");
   const [address, setAddress] = useState(userData.address || "");
   const [phone, setPhone] = useState(userData.phone || "");
   const [website, setWebsite] = useState(userData.website || "");
@@ -12,6 +13,7 @@ const ProfileUpdateModal = ({ userData, onClose }) => {
     e.preventDefault();
     try {
       await updateUser(userData.email, {
+        photoUrl,
         address,
         phone,
         website,
@@ -44,6 +46,15 @@ const ProfileUpdateModal = ({ userData, onClose }) => {
       <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 md:w-1/3">
         <h2 className="text-3xl font-bold mb-6 text-gray-500">Update Profile</h2>
         <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2 text-gray-500">Photo URL:</label>
+            <input
+              type="text"
+              value={photoUrl}
+              onChange={(e) => setPhotoUrl(e.target.value)}
+              className="input input-bordered w-full"
+            />
+          </div>
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2 text-gray-500">Address:</label>
             <input
@@ -91,7 +102,5 @@ const ProfileUpdateModal = ({ userData, onClose }) => {
     </div>
   );
 };
-
-
 
 export default ProfileUpdateModal;
