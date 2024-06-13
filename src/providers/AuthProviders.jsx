@@ -25,7 +25,7 @@ const AuthProviders = ({ children }) => {
   // Fetch all tour places data
   const fetchTourPlaces = async () => {
     try {
-      const response = await fetch('http://localhost:5000/tour-places');
+      const response = await fetch('https://bhromonkari-server.vercel.app/tour-places');
       if (!response.ok) {
         throw new Error(`Error fetching tour places: HTTP status ${response.status}`);
       }
@@ -42,7 +42,7 @@ const AuthProviders = ({ children }) => {
 const fetchTourPlan = async (email) => {
   try {
     console.log('Fetching budget data for:', email);
-    const response = await fetch(`http://localhost:5000/tour-plan?email=${email}`, {
+    const response = await fetch(`https://bhromonkari-server.vercel.app/tour-plan?email=${email}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -87,7 +87,7 @@ useEffect(() => {
   // Fetch user data from the backend
   const fetchUserData = async (email) => {
     try {
-      const response = await fetch(`http://localhost:5000/users?email=${email}`);
+      const response = await fetch(`https://bhromonkari-server.vercel.app/users?email=${email}`);
       if (!response.ok) {
         throw new Error(`Error fetching user data: HTTP status ${response.status}`);
       }
@@ -104,7 +104,7 @@ useEffect(() => {
     setLoading(true);
     try {
       // Check if the user already exists
-      const existingUserResponse = await fetch(`http://localhost:5000/users?email=${email}`);
+      const existingUserResponse = await fetch(`https://bhromonkari-server.vercel.app/users?email=${email}`);
       if (!existingUserResponse.ok) {
         throw new Error(`Error checking existing user: HTTP status ${existingUserResponse.status}`);
       }
@@ -116,7 +116,7 @@ useEffect(() => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name,  });
       const saveUser = { name, email,  };
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(saveUser),
@@ -149,7 +149,7 @@ useEffect(() => {
   const updateUser = async (email, updates) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/users/${email}`, {
+      const response = await fetch(`https://bhromonkari-server.vercel.app/users/${email}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updates),
@@ -189,7 +189,7 @@ useEffect(() => {
   const sendBudgetData = async (email, budgetData) => {
     try {
       console.log('Sending budget data for:', email);
-      const response = await fetch("http://localhost:5000/tourist-wallet", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/tourist-wallet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, ...budgetData }),
@@ -211,7 +211,7 @@ useEffect(() => {
       console.log('Sending spending data for:', email);
       console.log('Spending data:', spendingData);
   
-      const response = await fetch("http://localhost:5000/regular-spending", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/regular-spending", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, ...spendingData }), // Include email in the data
@@ -231,7 +231,7 @@ useEffect(() => {
   const fetchBudgetData = async (email) => {
     try {
       console.log('Fetching budget data for:', email);
-      const response = await fetch(`http://localhost:5000/tourist-wallet?email=${email}`, {
+      const response = await fetch(`https://bhromonkari-server.vercel.app/tourist-wallet?email=${email}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -258,7 +258,7 @@ useEffect(() => {
   const fetchSpendingData = async (email) => {
     try {
       console.log('Fetching spending data for:', email);
-      const response = await fetch(`http://localhost:5000/regular-spending?email=${email}`, {
+      const response = await fetch(`https://bhromonkari-server.vercel.app/regular-spending?email=${email}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -300,7 +300,7 @@ useEffect(() => {
       const email = user.email;
 
       const saveUser = { name, email, photoUrl };
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://bhromonkari-server.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(saveUser),
