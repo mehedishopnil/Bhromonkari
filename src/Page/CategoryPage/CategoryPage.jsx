@@ -50,8 +50,16 @@ const CategoryPage = () => {
   }
 
   if (loading) {
-    return <div><Loading/></div>;
+    return <div><Loading /></div>;
   }
+
+  const truncateDescription = (description, wordLimit) => {
+    const words = description.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return description;
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -65,7 +73,7 @@ const CategoryPage = () => {
               <img src={item.image} alt={item.name} className="w-full h-[300px] object-cover mb-2 rounded-md" />
               <h3 className="text-xl font-bold mb-2">{item.name}</h3>
               <p className="mb-2">Location: {item.location}</p>
-              <p>{item.description}</p>
+              <p>{truncateDescription(item.description, 50)}</p>
             </div>
           </Link>
         ))}

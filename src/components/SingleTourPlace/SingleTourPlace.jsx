@@ -47,6 +47,13 @@ const SingleTourPlace = () => {
     return <div><Loading /></div>;
   }
 
+  const formatDescription = (description) => {
+    const paragraphs = description.split('\n').filter(paragraph => paragraph.trim() !== '');
+    return paragraphs.map((paragraph, index) => (
+      <p key={index} className="mb-4 text-justify">{paragraph}</p>
+    ));
+  };
+
   return (
     <div className="container mx-auto px-4">
       <h2 className="text-center text-2xl font-bold py-5">{tourPlace.name}</h2>
@@ -55,7 +62,7 @@ const SingleTourPlace = () => {
           <img src={tourPlace.image} alt={tourPlace.name} className="w-full h-auto rounded-lg shadow-md mb-4" />
           <div className="mb-4">
             <p className="text-xl mb-2">Location: {tourPlace.location}</p>
-            <p className="mb-2 text-justify">{tourPlace.description}</p>
+            <div>{formatDescription(tourPlace.description)}</div>
             <p>{tourPlace.details}</p>
           </div>
         </div>
@@ -77,7 +84,7 @@ const SingleTourPlace = () => {
           </div>
 
           <div className="border rounded-lg p-4 mb-4 shadow-md">
-            <h3 className="text-xl text-red-500 font-semibold mb-2">Red Alert Zone </h3>
+            <h3 className="text-xl text-red-500 font-semibold mb-2">Red Alert Zone</h3>
             <div className='flex gap-3'>
               <AiFillAlert className='text-red-500 text-2xl' />
               <p className='font-bold'>{tourPlace.redAlartPlace}</p>

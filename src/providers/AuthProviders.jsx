@@ -51,22 +51,32 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  const createUser = async (name, photoUrl, email, password) => {
+  const createUser = async (name, email, password) => {
     setLoading(true);
     try {
+      // Check if the user already exists
+      const existingUserResponse = await fetch(`https://bhromonkari-server.vercel.app/users?email=${email}`);
+      if (!existingUserResponse.ok) {
+        throw new Error(`Error checking existing user: HTTP status ${existingUserResponse.status}`);
+      }
+      const existingUsers = await existingUserResponse.json();
+      if (existingUsers.length > 0) {
+        throw new Error('User already registered');
+      }
+  
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCredential.user, { displayName: name, photoURL: photoUrl });
-      const saveUser = { name, email, photoUrl };
+      await updateProfile(userCredential.user, { displayName: name, photoURL: null });
+      const saveUser = { name, email, photoUrl: null };
       const response = await fetch("https://bhromonkari-server.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(saveUser),
       });
-
+  
       if (!response.ok) {
         throw new Error(`Error creating user: HTTP status ${response.status}`);
       }
-
+  
       const userCreateData = await response.json();
       if (userCreateData.insertedId) {
         Swal.fire({
@@ -75,7 +85,7 @@ const AuthProviders = ({ children }) => {
           hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" },
         });
       }
-
+  
       setUser(userCredential.user);
       return userCredential;
     } catch (error) {
@@ -85,6 +95,7 @@ const AuthProviders = ({ children }) => {
       setLoading(false);
     }
   };
+  
 
   const updateUser = async (email, updates) => {
     try {

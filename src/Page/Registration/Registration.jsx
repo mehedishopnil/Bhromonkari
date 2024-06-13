@@ -32,7 +32,6 @@ const Registration = () => {
       });
   };
 
-
   const handleGoogleLogin = async () => {
     try {
       const result = await googleLogin();
@@ -55,7 +54,7 @@ const Registration = () => {
         `,
         },
       });
-      isRegistration(true);
+      setIsRegistration(true);
       navigate(from, { replace: true });
     } catch (error) {
       console.log(error);
@@ -131,20 +130,18 @@ const Registration = () => {
             </div>
           </form>
 
-          
           <div className="divider">OR</div> {/* Divider between login methods */}
 
-{/* Google Login */}
-    <div className="flex items-center form-control mb-4">
-      <button
-        onClick={handleGoogleLogin}
-        className="btn bg-[#4285F4] text-white hover:bg-[#357ae8] flex items-center justify-center"
-      >
-        <FcGoogle className="mr-2 text-2xl" /> {/* Google icon */}
-        Register with Google
-      </button>
-    </div>
-
+          {/* Google Login */}
+          <div className="flex items-center form-control mb-4">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn bg-[#4285F4] text-white hover:bg-[#357ae8] flex items-center justify-center"
+            >
+              <FcGoogle className="mr-2 text-2xl" /> {/* Google icon */}
+              Register with Google
+            </button>
+          </div>
         </div>
 
         <div className="text-center lg:text-left">
