@@ -19,7 +19,54 @@ const AuthProviders = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [getBudgetData, setGetBudgetData] = useState(null);
   const [getSpendingData, setGetSpendingData] = useState([]);
+  const [tourPlaces, setTourPlaces] = useState([]);
+  const [tourPlan, setTourPlan] = useState([]);
 
+  // Fetch all tour places data
+  const fetchTourPlaces = async () => {
+    try {
+      const response = await fetch('https://bhromonkari-server.vercel.app/tour-places');
+      if (!response.ok) {
+        throw new Error(`Error fetching tour places: HTTP status ${response.status}`);
+      }
+      const data = await response.json();
+      setTourPlaces(data);
+    } catch (error) {
+      console.error('Error fetching tour places:', error.message);
+    }
+  };
+
+
+ // Fetch Tour Plan data from the backend
+// Fetch budget data from the backend
+const fetchTourPlan = async (email) => {
+  try {
+    console.log('Fetching budget data for:', email);
+    const response = await fetch(`https://bhromonkari-server.vercel.app/tour-plan?email=${email}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching budget data: HTTP status ${response.status}`);
+    }
+
+    const data = await response.json();
+    setTourPlan(data);
+    console.log("Budget data retrieved successfully!", data);
+  } catch (error) {
+    console.error("Error retrieving budget data:", error.message);
+  }
+};
+
+useEffect(() => {
+  if (user && user.email) {
+    fetchBudgetData(user.email);
+  }
+}, [user]);
+
+
+  // Fetch user data based on authentication state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
@@ -37,6 +84,7 @@ const AuthProviders = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  // Fetch user data from the backend
   const fetchUserData = async (email) => {
     try {
       const response = await fetch(`https://bhromonkari-server.vercel.app/users?email=${email}`);
@@ -51,6 +99,7 @@ const AuthProviders = ({ children }) => {
     }
   };
 
+  // Create a new user
   const createUser = async (name, email, password) => {
     setLoading(true);
     try {
@@ -95,8 +144,8 @@ const AuthProviders = ({ children }) => {
       setLoading(false);
     }
   };
-  
 
+  // Update user data
   const updateUser = async (email, updates) => {
     try {
       setLoading(true);
@@ -136,6 +185,7 @@ const AuthProviders = ({ children }) => {
     }
   };
 
+  // Send budget data to the backend
   const sendBudgetData = async (email, budgetData) => {
     try {
       console.log('Sending budget data for:', email);
@@ -155,6 +205,7 @@ const AuthProviders = ({ children }) => {
     }
   };
 
+  // Send spending data to the backend
   const sendSpendingData = async (email, spendingData) => {
     try {
       console.log('Sending spending data for:', email);
@@ -176,6 +227,7 @@ const AuthProviders = ({ children }) => {
     }
   };
 
+  // Fetch budget data from the backend
   const fetchBudgetData = async (email) => {
     try {
       console.log('Fetching budget data for:', email);
@@ -202,6 +254,7 @@ const AuthProviders = ({ children }) => {
     }
   }, [user]);
 
+  // Fetch spending data from the backend
   const fetchSpendingData = async (email) => {
     try {
       console.log('Fetching spending data for:', email);
@@ -228,11 +281,13 @@ const AuthProviders = ({ children }) => {
     }
   }, [user]);
 
+  // Log in with email and password
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // Log in with Google
   const googleLogin = async () => {
     setLoading(true);
     try {
@@ -274,11 +329,16 @@ const AuthProviders = ({ children }) => {
     }
   };
 
+  // Log out
   const LogOut = () => {
     setLoading(true);
     return signOut(auth);
   };
 
+
+
+
+  // Auth context value with all available functions and state
   const authInfo = {
     user,
     loading,
@@ -292,8 +352,15 @@ const AuthProviders = ({ children }) => {
     fetchBudgetData,
     fetchSpendingData,
     getBudgetData,
-    getSpendingData
+    getSpendingData,
+    tourPlaces,
+    tourPlan
   };
+
+  // Fetch tour places when the component mounts
+  useEffect(() => {
+    fetchTourPlaces();
+  }, []);
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
