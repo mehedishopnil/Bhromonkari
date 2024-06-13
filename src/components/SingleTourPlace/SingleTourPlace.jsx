@@ -13,7 +13,7 @@ const SingleTourPlace = () => {
   useEffect(() => {
     const fetchTourPlace = async () => {
       try {
-        const response = await axios.get(`https://bhromonkari-server.vercel.app/tour-places/${_id}`);
+        const response = await axios.get(`http://localhost:5000/tour-places/${_id}`);
         setTourPlace(response.data);
       } catch (error) {
         console.error('Error fetching tour place data:', error);
@@ -31,7 +31,7 @@ const SingleTourPlace = () => {
 
     try {
       const tourPlanData = { email: user.email, tourPlaceId: _id };
-      const response = await axios.post('https://bhromonkari-server.vercel.app/tour-plan', tourPlanData);
+      const response = await axios.post('http://localhost:5000/tour-plan', tourPlanData);
       if (response.status === 201) {
         alert('Tour plan added successfully!');
       } else {

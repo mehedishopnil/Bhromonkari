@@ -11,7 +11,7 @@ const SingleTourGuide = () => {
   useEffect(() => {
     const fetchTourGuides = async () => {
       try {
-        const response = await axios.get(`https://bhromonkari-server.vercel.app/tour-places/${_id}/tourGuide`);
+        const response = await axios.get(`http://localhost:5000/tour-places/${_id}/tourGuide`);
         setTourGuides(response.data);
       } catch (error) {
         console.error('Error fetching tour guide data:', error);

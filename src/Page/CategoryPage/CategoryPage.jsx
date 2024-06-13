@@ -21,7 +21,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://bhromonkari-server.vercel.app/tour-places');
+        const response = await axios.get('http://localhost:5000/tour-places');
         const filteredData = response.data.filter(item => item.category.trim().toLowerCase() === category.trim().toLowerCase());
         setCategoryData(filteredData);
       } catch (error) {
