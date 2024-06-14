@@ -151,7 +151,7 @@ const Login = () => {
 
             <div className="divider">OR</div> {/* Divider between login methods */}
 
-        {/* Google Login */}
+            {/* Google Login */}
             <div className="flex items-center form-control mb-4">
               <button
                 onClick={handleGoogleLogin}
