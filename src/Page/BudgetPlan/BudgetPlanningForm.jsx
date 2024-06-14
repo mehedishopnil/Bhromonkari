@@ -1,9 +1,13 @@
-import React, { useContext, useState } from 'react';
+import  { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProviders';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+
 
 const BudgetPlanningForm = ({ onClose }) => {
   const { sendBudgetData, user } = useContext(AuthContext);  // Ensure correct naming
+  const navigate = useNavigate();  // Get navigate function
+
   const [formData, setFormData] = useState({
     transportBudget: "",
     hotelBudget: "",
@@ -27,7 +31,7 @@ const BudgetPlanningForm = ({ onClose }) => {
       }, 0);
 
       // Add total budget to formData
-      const datanToSend = {
+      const dataToSend = {
         ...formData,
         totalBudget: totalBudget.toFixed(2) // Round to 2 decimal places
       };
@@ -51,6 +55,7 @@ const BudgetPlanningForm = ({ onClose }) => {
             othersBudget: ''
           });
           onClose(); // Close the popup after the success message is closed
+          navigate('../overview');
         }
       });
     } catch (error) {
