@@ -204,6 +204,7 @@ useEffect(() => {
       throw error;
     }
   };
+  
 
   // Send spending data to the backend
   const sendSpendingData = async (email, spendingData) => {
@@ -226,6 +227,7 @@ useEffect(() => {
       throw error;
     }
   };
+
 
   // Fetch budget data from the backend
   const fetchBudgetData = async (email) => {
@@ -253,6 +255,8 @@ useEffect(() => {
       fetchBudgetData(user.email);
     }
   }, [user]);
+
+
 
   // Fetch spending data from the backend
   const fetchSpendingData = async (email) => {

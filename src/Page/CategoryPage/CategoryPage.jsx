@@ -68,7 +68,7 @@ const CategoryPage = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {categoryData.map((item) => (
-          <Link to={`/tour-places/${item._id}`} key={item.id}>
+          <Link to={`/tour-places/${item._id}`} key={item._id}>
             <div className="border p-4 rounded-md mb-4 hover:shadow-lg transition-shadow duration-300">
               <img src={item.image} alt={item.name} className="w-full h-[300px] object-cover mb-2 rounded-md" />
               <h3 className="text-xl font-bold mb-2">{item.name}</h3>

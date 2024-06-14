@@ -5,6 +5,8 @@ import { MdOutlineLuggage } from "react-icons/md";
 import { LiaMoneyBillSolid } from "react-icons/lia";
 import { FaHome, FaUser } from "react-icons/fa";
 import { HiOutlineHomeModern } from "react-icons/hi2";
+import { LuPlaneTakeoff } from "react-icons/lu";
+import { RiHotelLine } from "react-icons/ri";
 
 const Dashboard = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,6 +40,18 @@ const Dashboard = () => {
             <li>
               <Link to="budget-plan">
                 <LiaMoneyBillSolid /> Budget Plan
+              </Link>
+            </li>
+
+            <li>
+              <Link to="../tour-plan">
+              <LuPlaneTakeoff /> My Tour Plan
+              </Link>
+            </li>
+            <li>
+
+              <Link to="../bookings">
+              <RiHotelLine /> My Bookings
               </Link>
             </li>
 
