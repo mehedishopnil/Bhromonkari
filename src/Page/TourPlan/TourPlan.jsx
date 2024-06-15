@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProviders";
 import Loading from "../../components/Loading";
+import { Link } from "react-router-dom";
 
 const TourPlan = () => {
   const { tourPlan } = useContext(AuthContext);
@@ -68,7 +69,7 @@ const TourPlan = () => {
                 <td>{truncateDescription(item.tourPlace.description, 30)}</td>
                 <td>{item.tourPlace.location}</td>
                 <td>
-                  <button className="btn border btn-xs">details</button>
+                  <Link to={`/tour-places/${item.tourPlace._id}`}><button className="btn border btn-xs">details</button></Link>
                 </td>
               </tr>
             ))}
