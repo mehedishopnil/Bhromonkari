@@ -30,7 +30,10 @@ const SingleTourPlace = () => {
     }
 
     try {
-      const tourPlanData = { email: user.email, tourPlaceId: _id };
+      const tourPlanData = { 
+        email: user.email, 
+        tourPlace 
+      };
       const response = await axios.post('https://bhromonkari-server.vercel.app/tour-plan', tourPlanData);
       if (response.status === 201) {
         alert('Tour plan added successfully!');

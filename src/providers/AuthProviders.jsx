@@ -30,38 +30,43 @@ const AuthProviders = ({ children }) => {
         throw new Error(`Error fetching tour places: HTTP status ${response.status}`);
       }
       const data = await response.json();
+      
       setTourPlaces(data);
     } catch (error) {
       console.error('Error fetching tour places:', error.message);
     }
   };
 
+  useEffect(() => {
+    fetchTourPlaces(); // Call fetchTourPlaces when the component mounts
+  }, []);
 
- // Fetch Tour Plan data from the backend
-// Fetch budget data from the backend
+
+
+// Fetch Tour Plan data from the backend
 const fetchTourPlan = async (email) => {
   try {
-    console.log('Fetching budget data for:', email);
+    console.log('Fetching tour plan data for:', email);
     const response = await fetch(`https://bhromonkari-server.vercel.app/tour-plan?email=${email}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
 
     if (!response.ok) {
-      throw new Error(`Error fetching budget data: HTTP status ${response.status}`);
+      throw new Error(`Error fetching tour plan data: HTTP status ${response.status}`);
     }
 
     const data = await response.json();
-    setTourPlan(data);
-    console.log("Budget data retrieved successfully!", data);
+    setTourPlan(data); // Assuming data is a single object
+    console.log("Tour plan data retrieved successfully!", data);
   } catch (error) {
-    console.error("Error retrieving budget data:", error.message);
+    console.error("Error retrieving tour plan data:", error.message);
   }
 };
 
 useEffect(() => {
   if (user && user.email) {
-    fetchBudgetData(user.email);
+    fetchTourPlan(user.email);
   }
 }, [user]);
 
@@ -204,7 +209,7 @@ useEffect(() => {
       throw error;
     }
   };
-  
+
 
   // Send spending data to the backend
   const sendSpendingData = async (email, spendingData) => {
