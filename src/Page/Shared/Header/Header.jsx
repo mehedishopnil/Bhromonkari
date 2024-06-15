@@ -2,11 +2,14 @@ import { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import NavLink from "./NavLink";
 import { AuthContext } from '../../../providers/AuthProviders';
+import Login from '../../Login/Login';
 
 const Header = () => {
   const { user, LogOut } = useContext(AuthContext);
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const {isAdmin} = user;
+  console.log(isAdmin)
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);

@@ -24,7 +24,7 @@ const Home = () => {
     <div className="relative h-screen">
       {/* Banner with dark overlay */}
       <div className="relative h-full bg-cover bg-center" style={{ backgroundImage: `url(${bannerImg})` }}>
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 bg-black opacity-80"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
           {/* Text in the middle of the banner */}
           <div className='space-y-3'>
