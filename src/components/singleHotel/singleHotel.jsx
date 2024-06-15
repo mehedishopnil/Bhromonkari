@@ -9,7 +9,7 @@ const SingleHotel = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { _id } = useParams(); // Ensure useParams hook uses the correct parameter name
-  const {user, bookings} = useContext(AuthContext);
+  const { user } = useContext(AuthContext); // Only take user from AuthContext
 
   useEffect(() => {
     const fetchHotels = async () => {
@@ -44,29 +44,35 @@ const SingleHotel = () => {
 
   console.log(hotels);
 
-
-  const handleBookings = async() => {
+  const handleBookings = async (hotel) => {
     if (!user) {
       alert('You need to be logged in to add to your tour plan.');
       return;
     }
 
     try {
-      const bookings = { 
-        email: user.email, 
-        bookings 
+      const bookingData = {
+        email: user.email,
+        hotelImage: hotel.hotelImage,
+        hotelName: hotel.hotelName,
+        hotelLocation: hotel.hotelLocation,
+        hotelPrice: hotel.hotelPrice,
+        hotelContact: hotel.hotelContact
+        
       };
-      const response = await axios.post('https://bhromonkari-server.vercel.app/bookings', tourPlanData);
+
+      const response = await axios.post('https://bhromonkari-server.vercel.app/bookings', bookingData);
       if (response.status === 201) {
-        alert('Tour plan added successfully!');
+        alert('Hotel booked successfully!');
+        // Optionally update bookings state or context if needed
       } else {
-        alert('Failed to add to tour plan.');
+        alert('Failed to book the hotel.');
       }
     } catch (error) {
-      console.error('Error adding to tour plan:', error);
-      alert('Error adding to tour plan.');
+      console.error('Error booking hotel:', error);
+      alert('Error booking hotel.');
     }
-  }
+  };
 
   return (
     <div className="container mx-auto bg-slate-100 px-4 py-8">
@@ -76,7 +82,7 @@ const SingleHotel = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {hotels.map((hotel) => (
           <div
-            key={hotel.hotelName}
+            key={hotel._id} // Use the unique ID of the hotel
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
             <img
@@ -94,9 +100,10 @@ const SingleHotel = () => {
               <p className="text-gray-600">Contact: {hotel.hotelContact}</p>
 
               <div className="mt-5">
-                <button onClick={handleBookings} className="btn border-gray-400 ">Book Now</button>
+                <button onClick={() => handleBookings(hotel)} className="btn border-gray-400 ">
+                  Book Now
+                </button>
               </div>
-
             </div>
           </div>
         ))}
