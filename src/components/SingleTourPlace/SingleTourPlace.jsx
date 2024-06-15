@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loading from '../Loading';
 import { AiFillAlert } from "react-icons/ai";
 import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const SingleTourPlace = () => {
   const { _id } = useParams();
@@ -25,26 +26,43 @@ const SingleTourPlace = () => {
 
   const handleAddToTourPlan = async () => {
     if (!user) {
-      alert('You need to be logged in to add to your tour plan.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You need to be logged in to add to your tour plan.',
+      });
       return;
     }
-
+  
     try {
-      const tourPlanData = { 
-        email: user.email, 
-        tourPlace 
+      const tourPlanData = {
+        email: user.email,
+        tourPlace
       };
       const response = await axios.post('https://bhromonkari-server.vercel.app/tour-plan', tourPlanData);
       if (response.status === 201) {
-        alert('Tour plan added successfully!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Tour plan added successfully!',
+        });
       } else {
-        alert('Failed to add to tour plan.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed to add to tour plan.',
+        });
       }
     } catch (error) {
-      console.error('Error adding to tour plan:', error);
-      alert('Error adding to tour plan.');
+      console.error('Error adding to tour plan:', error.response || error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error adding to tour plan.',
+      });
     }
   };
+  
 
   if (!tourPlace) {
     return <div><Loading /></div>;

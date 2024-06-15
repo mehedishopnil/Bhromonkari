@@ -24,7 +24,6 @@ const Bookings = () => {
               </th>
               <th>Image</th>
               <th>Name</th>
-              <th>Description</th>
               <th>Location</th>
               <th></th>
             </tr>
@@ -39,7 +38,7 @@ const Bookings = () => {
                     <input type="checkbox" className="checkbox" />
                   </label>
                 </td>
-                
+
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
@@ -64,22 +63,12 @@ const Bookings = () => {
                 </td>
 
                 <td>
-                  <Link to={`/tour-places/${item.tourPlace._id}`}><button className="btn border btn-xs">details</button></Link>
+                  <Link to={`/tour-places/${item._id}`}><button className="btn border btn-xs">details</button></Link>
                 </td>
               </tr>
             ))}
           </tbody>
-          {/* foot */}
-          <tfoot>
-            <tr>
-              <th></th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Location</th>
-              <th></th>
-            </tr>
-          </tfoot>
+         
         </table>
       </div>
         </div>

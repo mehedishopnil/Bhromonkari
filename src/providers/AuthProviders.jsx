@@ -58,7 +58,7 @@ const fetchTourPlan = async (email) => {
     }
 
     const data = await response.json();
-    setTourPlan(data); // Assuming data is a single object
+    setTourPlan(data); // Assuming data is an array of tour plans
     console.log("Tour plan data retrieved successfully!", data);
   } catch (error) {
     console.error("Error retrieving tour plan data:", error.message);

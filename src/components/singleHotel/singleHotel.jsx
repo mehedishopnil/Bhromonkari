@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 import { AuthContext } from "../../providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const SingleHotel = () => {
   const [hotels, setHotels] = useState([]);
@@ -46,7 +47,11 @@ const SingleHotel = () => {
 
   const handleBookings = async (hotel) => {
     if (!user) {
-      alert('You need to be logged in to add to your tour plan.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You need to be logged in to add to your tour plan.',
+      });
       return;
     }
 
@@ -58,19 +63,30 @@ const SingleHotel = () => {
         hotelLocation: hotel.hotelLocation,
         hotelPrice: hotel.hotelPrice,
         hotelContact: hotel.hotelContact
-        
       };
 
       const response = await axios.post('https://bhromonkari-server.vercel.app/bookings', bookingData);
       if (response.status === 201) {
-        alert('Hotel booked successfully!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Booked!',
+          text: 'Hotel booked successfully!',
+        });
         // Optionally update bookings state or context if needed
       } else {
-        alert('Failed to book the hotel.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed to book the hotel.',
+        });
       }
     } catch (error) {
       console.error('Error booking hotel:', error);
-      alert('Error booking hotel.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error booking hotel.',
+      });
     }
   };
 
