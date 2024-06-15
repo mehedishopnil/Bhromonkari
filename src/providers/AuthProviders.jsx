@@ -21,6 +21,7 @@ const AuthProviders = ({ children }) => {
   const [getSpendingData, setGetSpendingData] = useState([]);
   const [tourPlaces, setTourPlaces] = useState([]);
   const [tourPlan, setTourPlan] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
   // Fetch all tour places data
   const fetchTourPlaces = async () => {
@@ -67,6 +68,34 @@ const fetchTourPlan = async (email) => {
 useEffect(() => {
   if (user && user.email) {
     fetchTourPlan(user.email);
+  }
+}, [user]);
+
+
+// Fetch Tour Plan data from the backend
+const fetchBookings = async (email) => {
+  try {
+    console.log('Fetching tour plan data for:', email);
+    const response = await fetch(`https://bhromonkari-server.vercel.app/bookings?email=${email}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching tour plan data: HTTP status ${response.status}`);
+    }
+
+    const data = await response.json();
+    setBookings(data); // Assuming data is a single object
+    console.log("Tour plan data retrieved successfully!", data);
+  } catch (error) {
+    console.error("Error retrieving tour plan data:", error.message);
+  }
+};
+
+useEffect(() => {
+  if (user && user.email) {
+    fetchBookings(user.email);
   }
 }, [user]);
 
@@ -363,7 +392,8 @@ useEffect(() => {
     getBudgetData,
     getSpendingData,
     tourPlaces,
-    tourPlan
+    tourPlan,
+    bookings
   };
 
   // Fetch tour places when the component mounts
