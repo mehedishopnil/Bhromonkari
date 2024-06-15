@@ -6,9 +6,11 @@ const Main = () => {
     return (
         <div className="">
             <Header></Header>
+
             <div className="min-h-[400px]">
             <Outlet></Outlet>
             </div>
+            
             <Footer></Footer> 
             
         </div>

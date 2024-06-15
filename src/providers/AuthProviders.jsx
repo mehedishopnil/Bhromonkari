@@ -325,30 +325,45 @@ useEffect(() => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Log in with Google
-  const googleLogin = async () => {
-    setLoading(true);
-    try {
-      const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-      const name = user.displayName;
-      const photoUrl = user.photoURL;
-      const email = user.email;
+  
 
+  // Log in with Google
+const googleLogin = async () => {
+  setLoading(true);
+  try {
+    const result = await signInWithPopup(auth, new GoogleAuthProvider());
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+    const name = user.displayName;
+    const photoUrl = user.photoURL;
+    const email = user.email;
+
+    // Check if the user already exists in your backend
+    const response = await fetch(`https://bhromonkari-server.vercel.app/users?email=${email}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error checking user existence: HTTP status ${response.status}`);
+    }
+
+    const userData = await response.json();
+    if (userData.length === 0) {
+      // User doesn't exist, save the user data
       const saveUser = { name, email, photoUrl };
-      const response = await fetch("https://bhromonkari-server.vercel.app/users", {
+      const saveResponse = await fetch("https://bhromonkari-server.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(saveUser),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error saving user: HTTP status ${response.status}`);
+      if (!saveResponse.ok) {
+        throw new Error(`Error saving user: HTTP status ${saveResponse.status}`);
       }
 
-      const userCreateData = await response.json();
+      const userCreateData = await saveResponse.json();
       if (userCreateData.insertedId) {
         Swal.fire({
           title: "Login Success",
@@ -356,16 +371,17 @@ useEffect(() => {
           hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" },
         });
       }
-
-      setUser(user);
-      return result;
-    } catch (error) {
-      console.error("Error logging in with Google:", error.message);
-      throw error;
-    } finally {
-      setLoading(false);
     }
-  };
+
+    setUser(user);
+    return result;
+  } catch (error) {
+    console.error("Error logging in with Google:", error.message);
+    throw error;
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Log out
   const LogOut = () => {

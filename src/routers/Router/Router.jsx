@@ -15,6 +15,8 @@ import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
 import SingleHotel from "../../components/singleHotel/singleHotel";
 import SingleTourGuide from "../../components/SingleTourGuide/SingleTourGuide";
 import TestPage from "../../Page/TestPage";
+import AdminPanel from "../../layout/AdminPanel/AdminPanel";
+import AdminOverview from "../../Page/AdminOverview/AdminOverview";
 
 export const router = createBrowserRouter([
     {
@@ -82,6 +84,17 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile></Profile>
+            }
+        ]
+    },
+
+    {
+        path: '/admin',
+        element: <AdminPanel />,
+        children: [
+            {
+                path: 'admin-overview',
+                element: <AdminOverview />
             }
         ]
     }
