@@ -12,6 +12,8 @@ const Profile = () => {
   const [spendingDataArray, setSpendingDataArray] = useState([]);
   const [totalSpending, setTotalSpending] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const isAdmin = user ? user.isAdmin : false;
+
 
   useEffect(() => {
     // Ensure getSpendingData is an array
@@ -47,7 +49,15 @@ const Profile = () => {
             </div>
             <div className="py-2">
               <div className="block mt-1 text-lg leading-tight font-semibold text-gray-900">
-                <h1 className="text-xl font-bold">{name}</h1>
+                <h1 className="text-xl font-bold">
+                  {isAdmin && (
+                      <div>
+                        {name} <span className="badge badge-secondary">Admin</span>
+                      </div>
+                  )
+
+                  }
+                  </h1>
               </div>
               <div className="mt-4">
                 <div className="space-y-2">
@@ -67,27 +77,33 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="card bg-slate-100 w-1/2 mt-10 border py-5">
-        {getBudgetData ? (
-          <h1 className="text-center">Your Tour Budget: <span className="font-bold">{getBudgetData.totalBudget} Taka</span></h1>
-        ) : (
-          <h1 className="text-center text-red-500">You didn't set your budget data. Please set your budget from <Link to="../budget-plan" className="font-bold text-blue-500">here</Link>.</h1>
-        )}
-      </div>
-
-      <div className="flex flex-col items-center justify-center card bg-slate-100 w-1/2 mt-4 border py-5">
-        <h1 className="text-center">Your Total Spending: <span className="font-bold">{totalSpending} Taka</span></h1>
-        {getBudgetData && totalSpending > getBudgetData.totalBudget && (
-          <div className="flex gap-3 text-center text-red-500">
-            <AiFillAlert className="text-xl" /> You are crossing your budget limit. Be careful on spending.
+      {!isAdmin && (
+        <>
+          <div className="card bg-slate-100 w-1/2 mt-10 border py-5">
+            {getBudgetData ? (
+              <h1 className="text-center">Your Tour Budget: <span className="font-bold">{getBudgetData.totalBudget} Taka</span></h1>
+            ) : (
+              <h1 className="text-center text-red-500">You didn't set your budget data. Please set your budget from <Link to="../budget-plan" className="font-bold text-blue-500">here</Link>.</h1>
+            )}
           </div>
-        )}
-        {getBudgetData && totalSpending <= getBudgetData.totalBudget && (
-          <div className="flex gap-3 text-center text-green-500">
-            <AiFillAlert className="text-xl" /> You are in a safe spending position.
+          
+          {/* Your Total Spending */}
+          <div className="flex flex-col items-center justify-center card bg-slate-100 w-1/2 mt-4 border py-5">
+            <h1 className="text-center">Your Total Spending: <span className="font-bold">{totalSpending} Taka</span></h1>
+            {getBudgetData && totalSpending > getBudgetData.totalBudget && (
+              <div className="flex gap-3 text-center text-red-500">
+                <AiFillAlert className="text-xl" /> You are crossing your budget limit. Be careful on spending.
+              </div>
+            )}
+            {getBudgetData && totalSpending <= getBudgetData.totalBudget && (
+              <div className="flex gap-3 text-center text-green-500">
+                <AiFillAlert className="text-xl" /> You are in a safe spending position.
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
+      
       {isModalOpen && (
         <ProfileUpdateModal
           userData={user}

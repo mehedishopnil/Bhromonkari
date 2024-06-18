@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import {  Transition } from "@headlessui/react";
-import { MdOutlineLuggage } from "react-icons/md";
-import { LiaMoneyBillSolid } from "react-icons/lia";
-import { FaHome, FaUser } from "react-icons/fa";
+import { MdUpdate } from "react-icons/md";
+import { FaHome, FaUser, FaUsers } from "react-icons/fa";
 import { HiOutlineHomeModern } from "react-icons/hi2";
-import { LuPlaneTakeoff } from "react-icons/lu";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { RiHotelLine } from "react-icons/ri";
 
 const AdminPanel = () => {
@@ -34,24 +33,18 @@ const AdminPanel = () => {
             </li>
             <li>
               <Link to="expanse">
-                <MdOutlineLuggage /> All Users
+              <FaUsers /> All Users
               </Link>
             </li>
             <li>
               <Link to="budget-plan">
-                <LiaMoneyBillSolid /> Update Users
+              <MdUpdate /> Update Users
               </Link>
             </li>
 
             <li>
               <Link to="../tour-plan">
-              <LuPlaneTakeoff /> Admin Control
-              </Link>
-            </li>
-            <li>
-
-              <Link to="../bookings">
-              <RiHotelLine /> My Bookings
+              <MdAdminPanelSettings /> Admin Control
               </Link>
             </li>
 
@@ -63,7 +56,7 @@ const AdminPanel = () => {
               </Link>
             </li>
             <li>
-              <Link to="profile">
+              <Link to="../dashboard/profile">
                 <FaUser /> Profile
               </Link>
             </li>

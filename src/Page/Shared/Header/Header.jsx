@@ -2,14 +2,12 @@ import { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import NavLink from "./NavLink";
 import { AuthContext } from '../../../providers/AuthProviders';
-import Login from '../../Login/Login';
 
 const Header = () => {
   const { user, LogOut } = useContext(AuthContext);
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const {isAdmin} = user;
-  console.log(isAdmin)
+  const isAdmin = user ? user.isAdmin : false; // Check if user exists before accessing isAdmin
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -33,10 +31,16 @@ const Header = () => {
         <div className='hidden md:flex md:items-center md:space-x-10'>
           {user && (
             <>
-              <NavLink to='/' label='Home' isActive={isActive} />
-              <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
-              <NavLink to='/bookings' label='Bookings' isActive={isActive} />
-              <NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} />
+              {isAdmin ? (
+                <NavLink to='/admin/admin-overview' label='Admin Panel' isActive={isActive} />
+              ) : (
+                <>
+                  <NavLink to='/' label='Home' isActive={isActive} />
+                  <NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} />
+                  <NavLink to='/bookings' label='Bookings' isActive={isActive} />
+                  <NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} />
+                </>
+              )}
             </>
           )}
         </div>
@@ -79,10 +83,16 @@ const Header = () => {
           <ul className='space-y-4'>
             {user && (
               <>
-                <li><NavLink to='/' label='Home' isActive={isActive} onClick={closeMobileMenu} /></li>
-                <li><NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} onClick={closeMobileMenu} /></li>
-                <li><NavLink to='/bookings' label='Bookings' isActive={isActive} onClick={closeMobileMenu} /></li>
-                <li><NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} onClick={closeMobileMenu} /></li>
+                {isAdmin ? (
+                  <li><NavLink to='/admin/admin-overview' label='Admin Panel' isActive={isActive} onClick={closeMobileMenu} /></li>
+                ) : (
+                  <>
+                    <li><NavLink to='/' label='Home' isActive={isActive} onClick={closeMobileMenu} /></li>
+                    <li><NavLink to='/tour-plan' label='Tour Plan' isActive={isActive} onClick={closeMobileMenu} /></li>
+                    <li><NavLink to='/bookings' label='Bookings' isActive={isActive} onClick={closeMobileMenu} /></li>
+                    <li><NavLink to='/dashboard/overview' label='Dashboard' isActive={isActive} onClick={closeMobileMenu} /></li>
+                  </>
+                )}
               </>
             )}
           </ul>
