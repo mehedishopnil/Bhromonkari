@@ -50,7 +50,7 @@ const Header = () => {
           {user ? (
             <>
               {user.photoUrl && (
-                <Link to={'/dashboard/profile'}>
+                <Link to={isAdmin ? '/admin/profile' : '/dashboard/profile'}>
                   <div className="flex items-center gap-2">
                     <img src={user.photoUrl} alt="user Avatar" className="w-10 h-10 rounded-full" />
                     <h1 className="text-white">{user.displayName}</h1>

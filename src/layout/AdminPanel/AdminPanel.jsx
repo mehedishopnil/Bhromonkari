@@ -56,7 +56,7 @@ const AdminPanel = () => {
               </Link>
             </li>
             <li>
-              <Link to="../dashboard/profile">
+              <Link to="profile">
                 <FaUser /> Profile
               </Link>
             </li>
@@ -95,7 +95,7 @@ const AdminPanel = () => {
               </li>
               <li>
                 <button onClick={() => handleMenuItemClick("/expanse")}>
-                  Expanse
+                Expense
                 </button>
               </li>
               <li>

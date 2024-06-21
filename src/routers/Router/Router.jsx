@@ -14,7 +14,6 @@ import Dashboard from "../../layout/Dashboard/Dashboard";
 import SingleTourPlace from "../../components/SingleTourPlace/SingleTourPlace";
 import SingleHotel from "../../components/singleHotel/singleHotel";
 import SingleTourGuide from "../../components/SingleTourGuide/SingleTourGuide";
-import TestPage from "../../Page/TestPage";
 import AdminPanel from "../../layout/AdminPanel/AdminPanel";
 import AdminOverview from "../../Page/AdminOverview/AdminOverview";
 
@@ -59,10 +58,7 @@ export const router = createBrowserRouter([
                 path: 'tour-guide/:_id',
                 element: <SingleTourGuide></SingleTourGuide>
             },
-            {
-                path: 'test',
-                element: <TestPage></TestPage>
-            }
+           
         ]
     },
     {
@@ -95,6 +91,10 @@ export const router = createBrowserRouter([
             {
                 path: 'admin-overview',
                 element: <AdminOverview />
+            },
+            {
+                path: 'profile',
+                element: <Profile />
             }
         ]
     }
