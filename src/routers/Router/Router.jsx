@@ -16,6 +16,7 @@ import SingleHotel from "../../components/singleHotel/singleHotel";
 import SingleTourGuide from "../../components/SingleTourGuide/SingleTourGuide";
 import AdminPanel from "../../layout/AdminPanel/AdminPanel";
 import AdminOverview from "../../Page/AdminOverview/AdminOverview";
+import AdminControl from "../../Page/AdminControl/AdminControl";
 
 export const router = createBrowserRouter([
     {
@@ -95,6 +96,10 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile />
+            }, 
+            {
+                path: 'admin-control',
+                element: <AdminControl/>
             }
         ]
     }

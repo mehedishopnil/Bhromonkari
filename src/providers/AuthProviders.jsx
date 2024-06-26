@@ -22,6 +22,7 @@ const AuthProviders = ({ children }) => {
   const [tourPlaces, setTourPlaces] = useState([]);
   const [tourPlan, setTourPlan] = useState([]);
   const [bookings, setBookings] = useState([]);
+  const [reviewsData, setReviewsData] = useState([]);
 
   // Fetch all tour places data
   const fetchTourPlaces = async () => {
@@ -40,6 +41,26 @@ const AuthProviders = ({ children }) => {
 
   useEffect(() => {
     fetchTourPlaces(); // Call fetchTourPlaces when the component mounts
+  }, []);
+
+
+  // Fetch Reviews data
+  const reviewsDatas = async () => {
+    try {
+      const response = await fetch('https://bhromonkari-server.vercel.app/reviews-data');
+      if (!response.ok) {
+        throw new Error(`Error fetching tour places: HTTP status ${response.status}`);
+      }
+      const data = await response.json();
+      
+      setReviewsData(data);
+    } catch (error) {
+      console.error('Error fetching tour places:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    reviewsDatas(); // Call fetchTourPlaces when the component mounts
   }, []);
 
 
@@ -409,7 +430,8 @@ const googleLogin = async () => {
     getSpendingData,
     tourPlaces,
     tourPlan,
-    bookings
+    bookings,
+    reviewsData
   };
 
   // Fetch tour places when the component mounts

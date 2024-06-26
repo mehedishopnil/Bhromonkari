@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineShop } from 'react-icons/ai';
 import { FaMountainCity } from 'react-icons/fa6';
@@ -8,6 +8,8 @@ import { GiForest } from 'react-icons/gi';
 import { LuSchool } from 'react-icons/lu';
 import { GiFarmTractor } from 'react-icons/gi';
 import bannerImg from '../../assets/Images/banner.jpg';
+import Reviews from './Reviews/Reviews';
+import { AuthContext } from '../../providers/AuthProviders';
 
 const categoryIcons = {
   Dhaka: AiOutlineShop,
@@ -20,9 +22,12 @@ const categoryIcons = {
 };
 
 const Home = () => {
+  const { reviewsData } = useContext(AuthContext);
+
   return (
-    <div className="relative h-screen">
-      {/* Banner with dark overlay */}
+    <div className="">
+      <div className='relative h-screen'>
+        {/* Banner with dark overlay */}
       <div className="relative h-full bg-cover bg-center" style={{ backgroundImage: `url(${bannerImg})` }}>
         <div className="absolute inset-0 bg-black opacity-80"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
@@ -55,7 +60,15 @@ const Home = () => {
             ))}
           </div>
         </div>
+        
       </div>
+      </div>
+       {/* reviews */}
+       <div>
+        <Reviews reviewsData= {reviewsData}/>
+      </div>
+
+     
     </div>
   );
 };

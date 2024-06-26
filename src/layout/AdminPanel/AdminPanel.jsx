@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import {  Transition } from "@headlessui/react";
 import { MdUpdate } from "react-icons/md";
@@ -9,6 +9,7 @@ import { RiHotelLine } from "react-icons/ri";
 
 const AdminPanel = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
@@ -43,7 +44,7 @@ const AdminPanel = () => {
             </li>
 
             <li>
-              <Link to="../tour-plan">
+              <Link to="admin-control">
               <MdAdminPanelSettings /> Admin Control
               </Link>
             </li>
