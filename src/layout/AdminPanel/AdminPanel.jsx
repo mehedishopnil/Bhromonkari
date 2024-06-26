@@ -33,7 +33,7 @@ const AdminPanel = () => {
               </Link>
             </li>
             <li>
-              <Link to="expanse">
+              <Link to="all-users">
               <FaUsers /> All Users
               </Link>
             </li>

@@ -17,6 +17,7 @@ import SingleTourGuide from "../../components/SingleTourGuide/SingleTourGuide";
 import AdminPanel from "../../layout/AdminPanel/AdminPanel";
 import AdminOverview from "../../Page/AdminOverview/AdminOverview";
 import AdminControl from "../../Page/AdminControl/AdminControl";
+import AllUsers from "../../Page/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
     {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
             {
                 path: 'admin-control',
                 element: <AdminControl/>
+            },
+            {
+                path: 'all-users',
+                element: <AllUsers/>
             }
         ]
     }

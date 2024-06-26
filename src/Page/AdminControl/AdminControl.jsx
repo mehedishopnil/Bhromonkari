@@ -26,7 +26,10 @@ const AdminControl = () => {
     return <div>Error: No user data found.</div>;
   }
 
-  console.log(users);
+  // Filter to show only admin users
+  const adminUsers = users.filter(user => user.isAdmin);
+
+  console.log(adminUsers);
 
   return (
     <div>
@@ -44,8 +47,8 @@ const AdminControl = () => {
             </tr>
           </thead>
           <tbody>
-            {/* Map over users data to render rows */}
-            {users.map((user, index) => (
+            {/* Map over adminUsers data to render rows */}
+            {adminUsers.map((user, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td><img src={user.photoUrl} alt={user.name} className="w-10 h-10 rounded-full" /></td>
