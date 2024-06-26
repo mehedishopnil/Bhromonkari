@@ -8,8 +8,8 @@ const Footer = () => {
 
           {/* Left side of the footer */}
           <div>
-            <h2 className="text-2xl font-bold mb-2">Footer Title</h2>
-            <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero in dui sollicitudin, et commodo odio venenatis.</p>
+            <h2 className="text-2xl font-bold mb-2 uppercase">Bhoromonkari</h2>
+            <p className="text-sm">Here you can find all the information you need to make your tour easy. Our resources provide detailed guides and tips for various destinations. We offer personalized recommendations based on your preferences. Plan your trip effortlessly with our comprehensive travel tools.</p>
           </div>
 
           {/* Right side of the footer */}
