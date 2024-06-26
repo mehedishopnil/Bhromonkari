@@ -3,23 +3,30 @@ import { AuthContext } from '../../providers/AuthProviders';
 import Loading from '../../components/Loading';
 
 const AdminControl = () => {
-  const { user } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(true); // State to track loading status
+  const { userData } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     // Simulate data loading delay (replace with actual data fetching logic)
     setTimeout(() => {
+      if (userData) {
+        // Assuming userData is already an array or needs to be converted to an array
+        setUsers(userData); // Set users state with userData array
+      }
       setIsLoading(false); // Set loading to false after timeout
     }, 2000); // Adjust timeout as needed
-  }, []);
+  }, [userData]); // Dependency on 'userData' to trigger effect on data change
 
   if (isLoading) {
-    return <div><Loading/></div>; // Render loading indicator while data is loading
+    return <div><Loading /></div>; // Render loading indicator while data is loading
   }
 
-  const {name, isAdmin, email, photoUrl} = user
+  if (!users || users.length === 0) {
+    return <div>Error: No user data found.</div>;
+  }
 
-  console.log({name, isAdmin, email, photoUrl});
+  console.log(users);
 
   return (
     <div>
@@ -29,7 +36,7 @@ const AdminControl = () => {
           {/* Table head */}
           <thead>
             <tr>
-              <th></th>
+              <th>ID</th>
               <th>Image</th>
               <th>Name</th>
               <th>Email</th>
@@ -37,15 +44,16 @@ const AdminControl = () => {
             </tr>
           </thead>
           <tbody>
-            {/* Example row */}
-            <tr>
-              <th>1</th>
-              <td><img src={photoUrl} alt="" /></td>
-              <td>{name}</td>
-              <td>{email}</td>
-              <td>{isAdmin}</td>
-            </tr>
-            {/* Render more rows based on data */}
+            {/* Map over users data to render rows */}
+            {users.map((user, index) => (
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <td><img src={user.photoUrl} alt={user.name} className="w-10 h-10 rounded-full" /></td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.isAdmin ? 'Admin' : 'User'}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

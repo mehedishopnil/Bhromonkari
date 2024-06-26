@@ -15,7 +15,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProviders = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [getBudgetData, setGetBudgetData] = useState(null);
   const [getSpendingData, setGetSpendingData] = useState([]);
@@ -23,6 +23,27 @@ const AuthProviders = ({ children }) => {
   const [tourPlan, setTourPlan] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [reviewsData, setReviewsData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
+  // Fetch all User data
+  const fetchUserDatas = async () => {
+    try {
+      const response = await fetch('https://bhromonkari-server.vercel.app/user-data');
+      if (!response.ok) {
+        throw new Error(`Error fetching tour places: HTTP status ${response.status}`);
+      }
+      const data = await response.json();
+      setUserData(data);
+    } catch (error) {
+      console.error('Error fetching tour places:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDatas(); // Call fetchTourPlaces when the component mounts
+  }, []);
+
+
 
   // Fetch all tour places data
   const fetchTourPlaces = async () => {
@@ -431,9 +452,12 @@ const googleLogin = async () => {
     tourPlaces,
     tourPlan,
     bookings,
-    reviewsData
+    reviewsData,
+    userData
   };
+ 
 
+  console.log(userData)
   // Fetch tour places when the component mounts
   useEffect(() => {
     fetchTourPlaces();
