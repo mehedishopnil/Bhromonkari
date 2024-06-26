@@ -14,7 +14,7 @@ const Footer = () => {
           </div>
 
           {/* Section 2: Navigation links */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 flex justify-center">
             <div className="mb-4">
               <h3 className="text-sm font-semibold mb-2">Quick Links</h3>
               <ul>
