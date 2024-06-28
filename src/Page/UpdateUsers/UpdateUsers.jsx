@@ -3,6 +3,7 @@ import Loading from '../../components/Loading';
 import { AuthContext } from '../../providers/AuthProviders';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MdDelete } from "react-icons/md";
 
 const UpdateUsers = () => {
   const { userData } = useContext(AuthContext);
@@ -49,6 +50,26 @@ const UpdateUsers = () => {
     }
   };
 
+  const handleDelete = async (userId) => {
+    try {
+      const response = await fetch(`https://bhromonkari-server.vercel.app/user-data/${userId}`, { // Update URL to correct backend address
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Error deleting user');
+      }
+      // Remove the deleted user from the local state
+      const updatedUsers = users.filter(user => user._id !== userId);
+      setUsers(updatedUsers);
+
+      // Show success message
+      toast.success('User deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      toast.error('Failed to delete user.');
+    }
+  };
+
   if (isLoading) {
     return <div><Loading /></div>; // Render loading indicator while data is loading
   }
@@ -57,14 +78,9 @@ const UpdateUsers = () => {
     return <div>Error: No user data found.</div>;
   }
 
-  // Filter out admin users
-  const nonAdminUsers = users.filter(user => !user.isAdmin);
-
-  console.log(nonAdminUsers);
-
   return (
     <div className='my-10'>
-      <h1 className="text-3xl font-bold text-center mb-6">All Users</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">Update Users</h1>
       <div className="overflow-x-auto">
         <table className="table">
           {/* Table head */}
@@ -79,8 +95,8 @@ const UpdateUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {/* Map over nonAdminUsers data to render rows */}
-            {nonAdminUsers.map((user, index) => (
+            {/* Map over users data to render rows */}
+            {users.map((user, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td><img src={user.photoUrl} alt={user.name} className="w-10 h-10 rounded-full" /></td>
@@ -90,6 +106,12 @@ const UpdateUsers = () => {
                 <td>
                   <button className="btn" onClick={() => handleMakeAdmin(user._id)}>
                     Make Admin
+                  </button>
+                </td>
+
+                <td>
+                  <button className="btn text-red-600 text-2xl" onClick={() => handleDelete(user._id)}>
+                    <MdDelete />
                   </button>
                 </td>
               </tr>
