@@ -13,6 +13,9 @@ import Swal from "sweetalert2";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
+import io from "socket.io-client"; 
+
+const socket = io("https://bhromonkari-server.vercel.app");
 
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState([]);
@@ -430,6 +433,29 @@ const googleLogin = async () => {
     setLoading(true);
     return signOut(auth);
   };
+
+  
+
+   // Handle userCreated event from the backend
+   useEffect(() => {
+    socket.on("userCreated", (newUser) => {
+      setUserData((prevUserData) => [...prevUserData, newUser]);
+    });
+
+    socket.on("userUpdated", (updatedUser) => {
+      setUserData((prevUserData) =>
+        prevUserData.map((user) =>
+          user.email === updatedUser.email ? updatedUser : user
+        )
+      );
+    });
+
+    // Cleanup on unmount
+    return () => {
+      socket.off("userCreated");
+      socket.off("userUpdated");
+    };
+  }, []);
 
 
 

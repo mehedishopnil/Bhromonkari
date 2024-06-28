@@ -100,7 +100,7 @@ const UpdateUsers = () => {
     <div className='my-10'>
       <h1 className="text-3xl font-bold text-center mb-6">Update Users</h1>
       <div className="overflow-x-auto p-4">
-        <h1 className='text-xl uppercase font-semibold my-4'>Total Users: {users.length}</h1>
+        <h1 className='text-xl uppercase font-semibold my-4'>Total Users & Admins: {users.length}</h1>
         <table className="table">
           <thead>
             <tr>
