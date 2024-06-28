@@ -13,9 +13,6 @@ import Swal from "sweetalert2";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
-import io from "socket.io-client"; 
-
-const socket = io("https://bhromonkari-server.vercel.app");
 
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState([]);
@@ -352,7 +349,7 @@ useEffect(() => {
 
       const data = await response.json();
       setGetSpendingData(data);
-      console.log("Spending data retrieved successfully!", data);
+      console.log("Spending data retrieved successfully!");
     } catch (error) {
       console.error("Error retrieving spending data:", error.message);
     }
@@ -434,29 +431,6 @@ const googleLogin = async () => {
     return signOut(auth);
   };
 
-  
-
-   // Handle userCreated event from the backend
-   useEffect(() => {
-    socket.on("userCreated", (newUser) => {
-      setUserData((prevUserData) => [...prevUserData, newUser]);
-    });
-
-    socket.on("userUpdated", (updatedUser) => {
-      setUserData((prevUserData) =>
-        prevUserData.map((user) =>
-          user.email === updatedUser.email ? updatedUser : user
-        )
-      );
-    });
-
-    // Cleanup on unmount
-    return () => {
-      socket.off("userCreated");
-      socket.off("userUpdated");
-    };
-  }, []);
-
 
 
 
@@ -482,8 +456,6 @@ const googleLogin = async () => {
     userData
   };
  
-
-  console.log(userData)
   // Fetch tour places when the component mounts
   useEffect(() => {
     fetchTourPlaces();

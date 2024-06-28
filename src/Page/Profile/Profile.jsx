@@ -7,30 +7,34 @@ import Loading from "../../components/Loading";
 import { AiFillAlert } from "react-icons/ai";
 
 const Profile = () => {
-  const { user, getBudgetData, getSpendingData } = useContext(AuthContext);
+  const { user, getBudgetData, getSpendingData, setUser } = useContext(AuthContext); // Assuming setUser function is provided by AuthContext
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [spendingDataArray, setSpendingDataArray] = useState([]);
   const [totalSpending, setTotalSpending] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const isAdmin = user ? user.isAdmin : false;
 
+  useEffect(() => {
+    setIsLoading(!user || !getBudgetData || !getSpendingData);
+  }, [user, getBudgetData, getSpendingData]);
 
   useEffect(() => {
-    // Ensure getSpendingData is an array
     if (Array.isArray(getSpendingData)) {
       setSpendingDataArray(getSpendingData);
     }
-    setIsLoading(false);
   }, [getSpendingData]);
 
   useEffect(() => {
-    // Calculate total spending
     const total = spendingDataArray.reduce((sum, item) => sum + item.spendingAmount, 0);
     setTotalSpending(total);
   }, [spendingDataArray]);
 
-  if (!user || isLoading) {
-    return <div><Loading /></div>;
+  const handleUserUpdate = (updatedUserData) => {
+    setUser(updatedUserData); // Update user data in context
+  };
+
+  if (isLoading) {
+    return <Loading />;
   }
 
   const { name, email, photoUrl, address, phone, website } = user;
@@ -41,23 +45,17 @@ const Profile = () => {
         <div className="flex justify-between space-x-5">
           <div className="flex space-x-5">
             <div className="md:flex-shrink-0">
-              <img
-                className="h-48 w-full object-cover md:w-48"
-                src={photoUrl}
-                alt={name}
-              />
+              <img className="h-48 w-full object-cover md:w-48" src={photoUrl} alt={name} />
             </div>
             <div className="py-2">
               <div className="block mt-1 text-lg leading-tight font-semibold text-gray-900">
                 <h1 className="text-xl font-bold">
                   {isAdmin && (
-                      <div>
-                        {name} <span className="badge badge-secondary">Admin</span>
-                      </div>
-                  )
-
-                  }
-                  </h1>
+                    <div>
+                      {name} <span className="badge badge-secondary">Admin</span>
+                    </div>
+                  )}
+                </h1>
               </div>
               <div className="mt-4">
                 <div className="space-y-2">
@@ -87,7 +85,6 @@ const Profile = () => {
             )}
           </div>
           
-          {/* Your Total Spending */}
           <div className="flex flex-col items-center justify-center card bg-slate-100 w-1/2 mt-4 border py-5">
             <h1 className="text-center">Your Total Spending: <span className="font-bold">{totalSpending} Taka</span></h1>
             {getBudgetData && totalSpending > getBudgetData.totalBudget && (
@@ -107,6 +104,7 @@ const Profile = () => {
       {isModalOpen && (
         <ProfileUpdateModal
           userData={user}
+          onUpdate={handleUserUpdate}
           onClose={() => setIsModalOpen(false)}
         />
       )}

@@ -28,8 +28,10 @@ const ProfileUpdateModal = ({ userData, onClose }) => {
         hideClass: {
           popup: 'animate__animated animate__fadeOutUp'
         }
+      }).then(() => {
+        onClose();
+        window.location.reload(); // Reload the page after modal is closed
       });
-      onClose();
     } catch (error) {
       Swal.fire({
         icon: 'error',
