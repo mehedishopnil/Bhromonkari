@@ -22,10 +22,10 @@ const AdminPanel = () => {
   };
 
   return (
-    <div>
-      <div className="lg:flex h-screen">
+    <div className="">
+      <div className="lg:flex h-screen ">
         {/* Sidebar for LG screens */}
-        <div className="h-[240px] lg:w-64 lg:flex-shrink-0 bg-slate-200 h-screen md:h-auto">
+        <div className="h-[240px]  lg:w-64 lg:flex-shrink-0 bg-slate-200 h-screen md:h-auto">
           <ul className="menu p-4 text-gray-700 font-bold text-lg">
             <li>
               <Link to="admin-overview">
@@ -38,7 +38,7 @@ const AdminPanel = () => {
               </Link>
             </li>
             <li>
-              <Link to="budget-plan">
+              <Link to="update-users">
               <MdUpdate /> Update Users
               </Link>
             </li>

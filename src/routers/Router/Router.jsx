@@ -18,6 +18,7 @@ import AdminPanel from "../../layout/AdminPanel/AdminPanel";
 import AdminOverview from "../../Page/AdminOverview/AdminOverview";
 import AdminControl from "../../Page/AdminControl/AdminControl";
 import AllUsers from "../../Page/AllUsers/AllUsers";
+import UpdateUsers from "../../Page/UpdateUsers/UpdateUsers";
 
 export const router = createBrowserRouter([
     {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
             {
                 path: 'all-users',
                 element: <AllUsers/>
+            },
+            {
+                path: 'update-users',
+                element: <UpdateUsers/>
             }
         ]
     }
