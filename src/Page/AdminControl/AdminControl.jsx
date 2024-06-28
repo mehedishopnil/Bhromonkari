@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProviders';
 import Loading from '../../components/Loading';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminControl = () => {
   const { userData } = useContext(AuthContext);
@@ -17,6 +19,35 @@ const AdminControl = () => {
       setIsLoading(false); // Set loading to false after timeout
     }, 2000); // Adjust timeout as needed
   }, [userData]); // Dependency on 'userData' to trigger effect on data change
+
+  const handleRemoveAdmin = async (userId) => {
+    try {
+      const response = await fetch(`https://bhromonkari-server.vercel.app/user-data/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isAdmin: false }), // Send the isAdmin field in the request body
+      });
+      if (!response.ok) {
+        throw new Error('Error updating user to regular user');
+      }
+      const data = await response.json();
+      console.log('User updated successfully:', data);
+
+      // Update the user's isAdmin status in the local state
+      const updatedUsers = users.map(user =>
+        user._id === userId ? { ...user, isAdmin: false } : user
+      );
+      setUsers(updatedUsers);
+
+      // Show success message
+      toast.success('User demoted to regular user successfully!');
+    } catch (error) {
+      console.error('Error updating user:', error);
+      toast.error('Failed to demote user to regular user.');
+    }
+  };
 
   if (isLoading) {
     return <div><Loading /></div>; // Render loading indicator while data is loading
@@ -44,6 +75,7 @@ const AdminControl = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Position</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,11 +87,17 @@ const AdminControl = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.isAdmin ? 'Admin' : 'User'}</td>
+                <td>
+                  <button className='btn' onClick={() => handleRemoveAdmin(user._id)}>
+                    Remove Admin
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </div>
   );
 };
