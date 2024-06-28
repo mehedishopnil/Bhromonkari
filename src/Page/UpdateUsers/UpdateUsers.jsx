@@ -23,7 +23,7 @@ const UpdateUsers = () => {
 
   const handleMakeAdmin = async (userId) => {
     try {
-      const response = await fetch(`https://bhromonkari-server.vercel.app/user-data/${userId}`, { // Update URL to correct backend address
+      const response = await fetch(`https://bhromonkari-server.vercel.app/user-data/${userId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const UpdateUsers = () => {
       console.log('User updated successfully:', data);
 
       // Update the user's isAdmin status in the local state
-      const updatedUsers = users.map(user => 
+      const updatedUsers = users.map(user =>
         user._id === userId ? { ...user, isAdmin: true } : user
       );
       setUsers(updatedUsers);
@@ -52,12 +52,13 @@ const UpdateUsers = () => {
 
   const handleDelete = async (userId) => {
     try {
-      const response = await fetch(`https://bhromonkari-server.vercel.app/user-data/${userId}`, { // Update URL to correct backend address
+      const response = await fetch(`https://bhromonkari-server.vercel.app/user-data/${userId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
         throw new Error('Error deleting user');
       }
+
       // Remove the deleted user from the local state
       const updatedUsers = users.filter(user => user._id !== userId);
       setUsers(updatedUsers);
@@ -81,7 +82,8 @@ const UpdateUsers = () => {
   return (
     <div className='my-10'>
       <h1 className="text-3xl font-bold text-center mb-6">Update Users</h1>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto p-4">
+        <h1 className='text-xl uppercase font-semibold'>Total Users: {users.length}</h1>
         <table className="table">
           {/* Table head */}
           <thead>
