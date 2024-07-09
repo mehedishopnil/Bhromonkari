@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+const truncateDescription = (description, maxLength) => {
+  if (description.length > maxLength) {
+    return description.substring(0, maxLength) + '...';
+  }
+  return description;
+};
+
 const SearchResultPage = () => {
   const location = useLocation();
   const { filteredPlaces } = location.state || { filteredPlaces: [] };
@@ -16,7 +23,7 @@ const SearchResultPage = () => {
               <img src={place.image} alt={place.name} className="w-full h-48 object-cover rounded-lg" />
               <h2 className="text-2xl font-bold mt-2">{place.name}</h2>
               <p className="text-lg">{place.location}</p>
-              <p className="text-sm">{place.description}</p>
+              <p>{truncateDescription(place.description, 100)}</p>
               <p className="text-xs text-red-600">{place.redAlartPlace}</p>
             </div>
           </Link>
