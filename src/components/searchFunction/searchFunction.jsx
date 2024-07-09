@@ -32,7 +32,7 @@ const SearchFunction = () => {
       <div className="w-3/4 md:w-1/2 flex items-center border border-gray-300 rounded-lg  shadow-lg">
         <input
           type="text"
-          placeholder="Search by name, location, or category"
+          placeholder="Search by place name or Location"
           className="w-full px-4 py-2 rounded-lg bg-transparent text-gray-50 focus:outline-none"
           value={searchTerm}
           onChange={handleSearchInputChange}
