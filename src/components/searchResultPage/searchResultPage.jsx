@@ -1,0 +1,26 @@
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+const searchResultPage = () => {
+  const location = useLocation();
+  const { filteredPlaces } = location.state || { filteredPlaces: [] };
+
+  return (
+    <div className="p-5">
+      <h1 className="text-3xl font-bold mb-5">Search Results</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredPlaces.map((place) => (
+          <div key={place._id} className="bg-white text-black p-4 rounded-lg shadow-md">
+            <img src={place.image} alt={place.name} className="w-full h-48 object-cover rounded-lg" />
+            <h2 className="text-2xl font-bold mt-2">{place.name}</h2>
+            <p className="text-lg">{place.location}</p>
+            <p className="text-sm">{place.description}</p>
+            <p className="text-xs text-red-600">{place.redAlartPlace}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default searchResultPage;

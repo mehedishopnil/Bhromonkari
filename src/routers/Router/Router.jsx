@@ -19,6 +19,7 @@ import AdminOverview from "../../Page/AdminOverview/AdminOverview";
 import AdminControl from "../../Page/AdminControl/AdminControl";
 import AllUsers from "../../Page/AllUsers/AllUsers";
 import UpdateUsers from "../../Page/UpdateUsers/UpdateUsers";
+import SearchResultPage from "../../components/searchResultPage/searchResultPage";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
                 path: 'tour-guide/:_id',
                 element: <SingleTourGuide></SingleTourGuide>
             },
+            {
+                path: 'search-results',
+                element: <SearchResultPage/>
+            }
            
         ]
     },
@@ -110,7 +115,8 @@ export const router = createBrowserRouter([
             {
                 path: 'update-users',
                 element: <UpdateUsers/>
-            }
+            },
+            
         ]
     }
 ]);
