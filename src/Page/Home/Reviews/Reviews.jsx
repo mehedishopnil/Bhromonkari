@@ -116,9 +116,9 @@ const Reviews = ({ reviewsData }) => {
         </div>
       </div>
       {!showAll && reviewsData.length > 10 && (
-        <div className="relative mt-4">
+        <div className="mt-4">
           <button
-            className="absolute left-[18%] btn bg-transparent text-gray-600 border-gray-400 border-[2px] hover:bg-gray-200"
+            className="btn bg-transparent text-gray-600 border-gray-400 border-[2px] hover:bg-gray-200"
             onClick={() => setShowAll(true)}
           >
             Show All Reviews
@@ -132,8 +132,10 @@ const Reviews = ({ reviewsData }) => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index * 3)}
-              className={`w-4 h-4 rounded-full bg-gray-300 ${
-                index * 3 === currentIndex ? "bg-gray-500" : ""
+              className={`w-4 h-4 rounded-full ${
+                currentIndex >= index * 3 && currentIndex < (index + 1) * 3
+                  ? "bg-gray-500"
+                  : "bg-gray-300"
               }`}
             ></button>
           )
