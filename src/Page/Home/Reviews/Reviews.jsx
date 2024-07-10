@@ -116,9 +116,9 @@ const Reviews = ({ reviewsData }) => {
         </div>
       </div>
       {!showAll && reviewsData.length > 10 && (
-        <div className="text-center mt-4">
+        <div className="relative mt-4">
           <button
-            className="btn btn-primary"
+            className="absolute left-[18%]  btn bg-transparent text-gray-600 border-gray-400 border-[2px] hover:bg-gray-200"
             onClick={() => setShowAll(true)}
           >
             Show All Reviews
@@ -127,15 +127,17 @@ const Reviews = ({ reviewsData }) => {
       )}
       {/* Navigation Indicators */}
       <div className="flex justify-center mt-4 space-x-2">
-        {reviewsToShow.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-4 h-4 rounded-full bg-gray-300 ${
-              index === currentIndex ? "bg-gray-500" : ""
-            }`}
-          ></button>
-        ))}
+        {Array.from({ length: Math.ceil(reviewsToShow.length / 2) }).map(
+          (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index * 2)}
+              className={`w-4 h-4 rounded-full bg-gray-300 ${
+                index * 2 === currentIndex ? "bg-gray-500" : ""
+              }`}
+            ></button>
+          )
+        )}
       </div>
     </div>
   );
