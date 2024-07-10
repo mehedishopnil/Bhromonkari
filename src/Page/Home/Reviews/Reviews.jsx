@@ -12,8 +12,8 @@ const Reviews = ({ reviewsData }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 2) % reviewsToShow.length);
-    }, 10000); // Change slide every 10 seconds
+      setCurrentIndex((prevIndex) => (prevIndex + 3) % reviewsToShow.length);
+    }, 5000); // Change slide every 5 seconds
     return () => clearInterval(interval);
   }, [reviewsToShow.length]);
 
@@ -35,12 +35,12 @@ const Reviews = ({ reviewsData }) => {
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 2) % reviewsToShow.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 3) % reviewsToShow.length);
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? reviewsToShow.length - 2 : prevIndex - 2
+      prevIndex === 0 ? reviewsToShow.length - 3 : prevIndex - 3
     );
   };
 
@@ -74,7 +74,7 @@ const Reviews = ({ reviewsData }) => {
   };
 
   return (
-    <div className="container bg-slate-100 mx-auto py-10">
+    <div className="container bg-slate-100 mx-auto px-10 py-10">
       <h1 className="text-center text-3xl font-semibold mb-7">
         Our Satisfied Tourist's reviews
       </h1>
@@ -86,7 +86,7 @@ const Reviews = ({ reviewsData }) => {
         onTouchEnd={() => setIsDragging(false)}
       >
         <div className="flex flex-wrap justify-center -mx-4">
-          {reviewsToShow.slice(currentIndex, currentIndex + 2).map((review) => (
+          {reviewsToShow.slice(currentIndex, currentIndex + 3).map((review) => (
             <div
               key={review.id}
               className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 transition-transform duration-300 ease-in-out"
@@ -118,7 +118,7 @@ const Reviews = ({ reviewsData }) => {
       {!showAll && reviewsData.length > 10 && (
         <div className="relative mt-4">
           <button
-            className="absolute left-[18%]  btn bg-transparent text-gray-600 border-gray-400 border-[2px] hover:bg-gray-200"
+            className="absolute left-[18%] btn bg-transparent text-gray-600 border-gray-400 border-[2px] hover:bg-gray-200"
             onClick={() => setShowAll(true)}
           >
             Show All Reviews
@@ -127,13 +127,13 @@ const Reviews = ({ reviewsData }) => {
       )}
       {/* Navigation Indicators */}
       <div className="flex justify-center mt-4 space-x-2">
-        {Array.from({ length: Math.ceil(reviewsToShow.length / 2) }).map(
+        {Array.from({ length: Math.ceil(reviewsToShow.length / 3) }).map(
           (_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index * 2)}
+              onClick={() => setCurrentIndex(index * 3)}
               className={`w-4 h-4 rounded-full bg-gray-300 ${
-                index * 2 === currentIndex ? "bg-gray-500" : ""
+                index * 3 === currentIndex ? "bg-gray-500" : ""
               }`}
             ></button>
           )
