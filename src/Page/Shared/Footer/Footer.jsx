@@ -28,10 +28,10 @@ const Footer = () => {
           </div>
 
           {/* Section 3: Social media icons */}
-          <div className="md:col-span-1">
-            <div>
-              <h3 className="text-sm font-semibold mb-2">Follow Us</h3>
-              <div className="flex space-x-4">
+          <div className="flex justify-end md:col-span-1">
+            <div className='pr-5'>
+              <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+              <div className="flex text-2xl space-x-4">
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white"><FaFacebook /></a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white"><FaInstagram /></a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white"><FaLinkedin /></a>
@@ -45,7 +45,7 @@ const Footer = () => {
       
       {/* Copyright notice section */}
       <div className="bg-gray-700 mt-5 py-2 rounded">
-        <p className="text-sm text-center">&copy; 2024 All rights reserved by Author</p>
+        <p className="text-sm text-center">&copy; {new Date().getFullYear()} All rights reserved by Author</p>
       </div>
     </footer>
   );
