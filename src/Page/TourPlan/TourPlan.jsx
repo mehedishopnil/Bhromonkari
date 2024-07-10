@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const TourPlan = () => {
   const { tourPlan } = useContext(AuthContext);
-  console.log(tourPlan);
 
   // Helper function to truncate description
   const truncateDescription = (description, wordLimit) => {
@@ -13,8 +12,12 @@ const TourPlan = () => {
     return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : description;
   };
 
+  if (tourPlan === undefined) {
+    return <Loading />;
+  }
+
   if (!tourPlan || tourPlan.length === 0) {
-    return <div><Loading/></div>;
+    return <div className="h-80 text-center mt-10 text-xl font-bold text-red-500">You didn't add any tour plan</div>;
   }
 
   return (
