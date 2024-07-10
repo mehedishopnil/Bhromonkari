@@ -1,17 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProviders";
 import { FaEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProfileUpdateModal from "./ProfileUpdateModal";
 import Loading from "../../components/Loading";
 import { AiFillAlert } from "react-icons/ai";
+import { MdLogout } from "react-icons/md";
 
 const Profile = () => {
-  const { user, getBudgetData, getSpendingData, setUser } = useContext(AuthContext); // Assuming setUser function is provided by AuthContext
+  const { user, getBudgetData, getSpendingData, setUser, LogOut } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [spendingDataArray, setSpendingDataArray] = useState([]);
   const [totalSpending, setTotalSpending] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   const isAdmin = user ? user.isAdmin : false;
 
   useEffect(() => {
@@ -30,7 +32,12 @@ const Profile = () => {
   }, [spendingDataArray]);
 
   const handleUserUpdate = (updatedUserData) => {
-    setUser(updatedUserData); // Update user data in context
+    setUser(updatedUserData);
+  };
+
+  const handleLogout = async () => {
+    await LogOut();
+    navigate('/login');
   };
 
   if (isLoading) {
@@ -41,7 +48,7 @@ const Profile = () => {
 
   return (
     <div className="container mx-auto flex flex-col justify-center items-center px-4 py-8">
-      <div className="w-10/12 border mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="relative w-10/12 border mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
         <div className="flex justify-between space-x-5">
           <div className="flex space-x-5">
             <div className="md:flex-shrink-0">
@@ -57,8 +64,10 @@ const Profile = () => {
                   )}
                 </h1>
               </div>
-              <div className="mt-4">
-                <div className="space-y-2">
+              <div className="">
+                <div className="space-y-1">
+                  <h1 className="text-2xl font-bold">Your Info</h1>
+                  <div className="divider"></div>
                   <p className="font-semibold text-gray-500"><span className="font-bold">Email: </span> {email}</p>
                   <p className="font-semibold text-gray-500"><span className="font-bold">Address: </span> {address}</p>
                   <p className="font-semibold text-gray-500"><span className="font-bold">Phone: </span> {phone}</p>
@@ -73,11 +82,18 @@ const Profile = () => {
             </Link>
           </div>
         </div>
+
+        {/* Log out section */}
+        <div className="absolute flex items-center gap-3 border-[2px] rounded-lg p-2 bottom-[10%] right-[2%] cursor-pointer" onClick={handleLogout}>
+          <button>Logout </button>
+          <MdLogout className="text-xl" />
+        </div>
       </div>
 
       {!isAdmin && (
-        <>
-          <div className="card bg-slate-100 w-1/2 mt-10 border py-5">
+        <div className="w-10/12 flex flex-col items-center border rounded-xl my-5 p-4">
+          <h1 className="text-xl font-bold pb-4">Your Budget and Spending</h1>
+          <div className="card bg-slate-100 w-1/2  border py-5">
             {getBudgetData ? (
               <h1 className="text-center">Your Tour Budget: <span className="font-bold">{getBudgetData.totalBudget} Taka</span></h1>
             ) : (
@@ -98,7 +114,7 @@ const Profile = () => {
               </div>
             )}
           </div>
-        </>
+        </div>
       )}
       
       {isModalOpen && (
